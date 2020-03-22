@@ -12,6 +12,8 @@
         "DECEASED": "Deceased",
         "RECOVERED": "Recovered",
         "INFECTED": "Most infected countries",
-        "PROGRESSION": "Progression by country"
+        "PROGRESSION": "Progression by country",
+        "ACTIVE": "Active",
+        "COUNTRY": "Country"
     }
 }

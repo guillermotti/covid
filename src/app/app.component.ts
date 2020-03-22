@@ -14,14 +14,6 @@ export class AppComponent {
     // translate.setDefaultLang('es');
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     //  translate.use('es');
-
-    this.httpClient.get('https://covid19.mathdro.id/api').subscribe(response => {
-      console.log(response);
-    });
-    this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
-      console.log(response);
-      console.log(new Date(response['updated']));
-    });
   }
 
   onActivate() {

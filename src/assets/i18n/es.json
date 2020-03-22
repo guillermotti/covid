@@ -12,6 +12,8 @@
         "DECEASED": "Fallecidos",
         "RECOVERED": "Recuperados",
         "INFECTED": "Países con mayor número de infectados",
-        "PROGRESSION": "Progresión del virus por país"
+        "PROGRESSION": "Progresión del virus por país",
+        "ACTIVE": "Active",
+        "COUNTRY": "Country"
     }
 }
