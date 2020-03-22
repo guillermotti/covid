@@ -28,5 +28,64 @@ $covid-theme: mat-light-theme($covid-primary, $covid-accent, $covid-warn);
 
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+    font-family: Inter;
+    src: url(src/assets/typeface/Inter-VariableFont_slnt,wght.ttf);
+}
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif !important; }
+
+header {
+    height: 52px;
+    display: flex;
+    background-color: #212121;
+    padding: 0 140px;
+    align-items: center;
+    justify-content: space-between;
+
+    & > div {
+        display: flex;
+    }
+
+    img {
+        cursor: pointer;
+    }
+
+    .menu-links {
+        margin-left: 76px;
+        display: flex;
+        align-items: center;
+        span {
+            text-transform: uppercase;
+            color: #f5f5f5;
+            font-size: 16px;
+            font-weight: 900;
+            margin: 0 24px;
+            cursor: pointer;
+        }
+    }
+
+    img.github {
+        width: 32px;
+    }
+}
+
+app-dashboard, app-information, app-countries, app-about {
+    display: flex;
+    margin: 40px 7.3%;
+}
+
+app-dashboard {
+    div.search {
+        width: 100%;
+        display: flex;
+        mat-form-field {
+            width: 100%;
+        }
+    }
+}
+
+footer {
+
+}

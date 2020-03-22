@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12.4.0-stretch-browsers-legacy
+    steps:
+      - checkout
+      - run:
+          command: npm install
+      - run:
+          command: ./node_modules/.bin/ng build --prod
+      - run:
+          command: npm install --save-dev firebase-tools
+      - run:
+          command: ./node_modules/.bin/firebase use feta-platform
+      - run:
+          command: |
+            cd functions
+            ls
+            npm install
+      - run:
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build

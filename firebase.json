@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": "public",
+    "site": "coronavirusinfo-app",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

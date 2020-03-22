@@ -1,5 +1,10 @@
 {
-    "HOME": {
-        "HELLO": "Hello"
+    "HEADER": {
+        "INFO": "Information",
+        "COUNTRIES": "Countries",
+        "ABOUT": "About"
+    },
+    "DASHBOARD": {
+        "SEARCH": "Search"
     }
 }

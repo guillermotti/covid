@@ -23,4 +23,8 @@ export class AppComponent {
       console.log(new Date(response['updated']));
     });
   }
+
+  onActivate() {
+    window.scroll(0, 0);
+  }
 }

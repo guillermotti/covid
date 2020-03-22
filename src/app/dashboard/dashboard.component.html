@@ -1,0 +1,42 @@
+<div class="search">
+    <mat-form-field class="input-search" appearance="fill">
+        <mat-label>{{ "DASHBOARD.SEARCH" | translate }}</mat-label>
+        <img src="assets/img/md-search.svg" matPrefix />
+        <input matInput>
+    </mat-form-field>
+</div>
+
+<div class="general-info">
+    <div>
+        <h1>
+            {{ "DASHBOARD.GENERAL_INFO" | translate }}
+        </h1>
+        <span>{{ "DASHBOARD.LAST_UPDATE" | translate }}: {{updated | date:'full'}}</span>
+    </div>
+    <div>
+        <div>
+            <span>
+                {{total}}
+            </span>
+            <span>
+                {{ "DASHBOARD.TOTAL" | translate }}
+            </span>
+        </div>
+        <div>
+            <span>
+                {{deceased}}
+            </span>
+            <span>
+                {{ "DASHBOARD.DECEASED" | translate }}
+            </span>
+        </div>
+        <div>
+            <span>
+                {{recovered}}
+            </span>
+            <span>
+                {{ "DASHBOARD.RECOVERED" | translate }}
+            </span>
+        </div>
+    </div>
+</div>
