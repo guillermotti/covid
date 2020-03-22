@@ -5,6 +5,13 @@
         "ABOUT": "About"
     },
     "DASHBOARD": {
-        "SEARCH": "Search"
+        "SEARCH": "Search",
+        "GENERAL_INFO": "General Information",
+        "LAST_UPDATE": "Last update",
+        "TOTAL": "Total cases",
+        "DECEASED": "Deceased",
+        "RECOVERED": "Recovered",
+        "INFECTED": "Most infected countries",
+        "PROGRESSION": "Progression by country"
     }
 }

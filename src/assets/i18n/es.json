@@ -1,10 +1,17 @@
 {
     "HEADER": {
-        "INFO": "Information",
-        "COUNTRIES": "Countries",
-        "ABOUT": "About"
+        "INFO": "Información",
+        "COUNTRIES": "Países",
+        "ABOUT": "Sobre Nosotros"
     },
     "DASHBOARD": {
-        "SEARCH": "Search"
+        "SEARCH": "Buscar",
+        "GENERAL_INFO": "Información general",
+        "LAST_UPDATE": "Última actualización",
+        "TOTAL": "Casos totales",
+        "DECEASED": "Fallecidos",
+        "RECOVERED": "Recuperados",
+        "INFECTED": "Países con mayor número de infectados",
+        "PROGRESSION": "Progresión del virus por país"
     }
 }

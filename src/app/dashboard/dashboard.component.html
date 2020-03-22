@@ -7,36 +7,52 @@
 </div>
 
 <div class="general-info">
-    <div>
+    <div class="section-title">
         <h1>
             {{ "DASHBOARD.GENERAL_INFO" | translate }}
         </h1>
-        <span>{{ "DASHBOARD.LAST_UPDATE" | translate }}: {{updated | date:'full'}}</span>
+        <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}: {{updated | date:'full'}}</span>
     </div>
-    <div>
+    <div div class="section-info">
         <div>
-            <span>
+            <h2>
                 {{total}}
-            </span>
-            <span>
+            </h2>
+            <h3>
                 {{ "DASHBOARD.TOTAL" | translate }}
-            </span>
+            </h3>
         </div>
         <div>
-            <span>
+            <h2>
                 {{deceased}}
-            </span>
-            <span>
+            </h2>
+            <h3>
                 {{ "DASHBOARD.DECEASED" | translate }}
-            </span>
+            </h3>
         </div>
         <div>
-            <span>
+            <h2>
                 {{recovered}}
-            </span>
-            <span>
+            </h2>
+            <h3>
                 {{ "DASHBOARD.RECOVERED" | translate }}
-            </span>
+            </h3>
+        </div>
+    </div>
+</div>
+<div class="countries-info">
+    <div class="countries-info-table">
+        <div class="section-title">
+            <h1>
+                {{ "DASHBOARD.INFECTED" | translate }}
+            </h1>
+        </div>
+    </div>
+    <div class="countries-info-chart">
+        <div class="section-title">
+            <h1>
+                {{ "DASHBOARD.PROGRESSION" | translate }}
+            </h1>
         </div>
     </div>
 </div>

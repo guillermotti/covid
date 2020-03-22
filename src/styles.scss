@@ -1,13 +1,17 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
-
+$custom-typography: mat-typography-config(
+  $font-family: "Inter",
+  $headline: mat-typography-level(34px, 40px, 700),
+  $title: mat-typography-level(45px, 55px, 500),
+  $subheading-2: mat-typography-level(26px, 31px, 300)
+);
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat-core();
+@include mat-core($custom-typography);
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -27,65 +31,145 @@ $covid-theme: mat-light-theme($covid-primary, $covid-accent, $covid-warn);
 @include angular-material-theme($covid-theme);
 
 /* You can add global styles to this file, and also import other style files */
-
-@font-face {
-    font-family: Inter;
-    src: url(src/assets/typeface/Inter-VariableFont_slnt,wght.ttf);
+@import url("https://rsms.me/inter/inter.css");
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: "Inter var", sans-serif;
+  }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif !important; }
+html,
+body {
+  height: 100%;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+
+body * {
+  font-family: Inter;
+}
 
 header {
-    height: 52px;
+  height: 52px;
+  display: flex;
+  background-color: #212121;
+  padding: 0 140px;
+  align-items: center;
+  justify-content: space-between;
+
+  & > div {
     display: flex;
-    background-color: #212121;
-    padding: 0 140px;
+  }
+
+  img {
+    cursor: pointer;
+  }
+
+  .menu-links {
+    margin-left: 76px;
+    display: flex;
     align-items: center;
-    justify-content: space-between;
-
-    & > div {
-        display: flex;
+    span {
+      text-transform: uppercase;
+      color: #f5f5f5;
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0 24px;
+      cursor: pointer;
     }
+  }
 
-    img {
-        cursor: pointer;
-    }
-
-    .menu-links {
-        margin-left: 76px;
-        display: flex;
-        align-items: center;
-        span {
-            text-transform: uppercase;
-            color: #f5f5f5;
-            font-size: 16px;
-            font-weight: 900;
-            margin: 0 24px;
-            cursor: pointer;
-        }
-    }
-
-    img.github {
-        width: 32px;
-    }
+  img.github {
+    width: 32px;
+  }
 }
 
-app-dashboard, app-information, app-countries, app-about {
-    display: flex;
-    margin: 40px 7.3%;
+app-dashboard,
+app-information,
+app-countries,
+app-about {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 40px 7.3%;
 }
 
 app-dashboard {
-    div.search {
-        width: 100%;
-        display: flex;
-        mat-form-field {
-            width: 100%;
-        }
+  div.search {
+    width: 100%;
+    display: flex;
+    mat-form-field {
+      width: 100%;
+      div.mat-form-field-infix {
+        margin-left: 10px;
+      }
     }
+  }
+  div.general-info {
+    width: 100%;
+    margin-top: 54px;
+    margin-bottom: 54px;
+    div.section-title {
+      margin-bottom: 40px;
+      h1 {
+        color: #212121;
+        font-size: 34px;
+        letter-spacing: 0.24px;
+        margin-bottom: 6px;
+      }
+      span.last-update {
+        color: #818181;
+        font-size: 16px;
+      }
+    }
+    div.section-info {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      & > div {
+        width: calc(100% / 3 - 10.67px);
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 16px;
+        padding: 32px 26px;
+        box-sizing: border-box;
+        &:nth-child(1) {
+          background-color: #a3aabb;
+        }
+        &:nth-child(2) {
+          background-color: #20212d;
+        }
+        &:nth-child(3) {
+          background-color: #3987fb;
+        }
+        h2 {
+          color: #f5f5f5;
+          font-size: 46px;
+          margin-bottom: 10px;
+        }
+        h3 {
+          color: #f5f5f5;
+          font-size: 26px;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+  div.countries-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    & > div {
+      width: calc(100% - 4%);
+      h1 {
+        width: 51%;
+        font-size: 30px;
+      }
+    }
+  }
 }
 
 footer {
-
 }
