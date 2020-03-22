@@ -12,12 +12,7 @@ jobs:
       - run:
           command: npm install --save-dev firebase-tools
       - run:
-          command: ./node_modules/.bin/firebase use feta-platform
-      - run:
-          command: |
-            cd functions
-            ls
-            npm install
+          command: ./node_modules/.bin/firebase use coronavirusinfo-app
       - run:
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
