@@ -14,11 +14,6 @@ jobs:
       - run:
           command: ./node_modules/.bin/firebase use coronavirusinfo-app
       - run:
-          command: |
-            cd functions
-            ls
-            npm install
-      - run:
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
