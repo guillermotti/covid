@@ -4,7 +4,7 @@
 // Plus imports for other components in your app.
 $custom-typography: mat-typography-config(
   $font-family: "Inter",
-  $headline: mat-typography-level(34px, 40px, 700),
+  $headline: mat-typography-level(34px, 40px, 600),
   $title: mat-typography-level(45px, 55px, 500),
   $subheading-2: mat-typography-level(26px, 31px, 300)
 );
@@ -101,8 +101,27 @@ app-dashboard {
     display: flex;
     mat-form-field {
       width: 100%;
+      font-size: 16px;
+      font-weight: 500;
+      div.mat-form-field-flex {
+        align-items: center;
+        padding: 0 .75em;
+        border-radius: 8px !important;
+        color: #818181;
+
+        div.mat-form-field-prefix {
+          display: flex;
+          img {
+            width: 16px;
+          }
+        }
+      }
+      div.mat-form-field-underline {
+        display: none;
+      }
       div.mat-form-field-infix {
         margin-left: 10px;
+        border-top: 8px solid transparent;
       }
     }
   }
