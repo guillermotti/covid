@@ -30,7 +30,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 export function BrowserLanguage() {
-  return navigator.language;
+  return navigator.language.split('-')[0];
 }
 
 @NgModule({
