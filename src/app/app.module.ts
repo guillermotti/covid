@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,10 +16,21 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { registerLocaleData } from '@angular/common';
+
+import localeEs from '@angular/common/locales/es';
+import localeEn from '@angular/common/locales/en';
+
+registerLocaleData(localeEs);
+registerLocaleData(localeEn);
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
+}
+
+export function BrowserLanguage() {
+  return navigator.language;
 }
 
 @NgModule({
@@ -36,7 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'es',
+      defaultLanguage: BrowserLanguage(),
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
@@ -48,7 +59,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'en'},
+    { provide: LOCALE_ID, useValue: 'es'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
