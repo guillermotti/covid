@@ -16,11 +16,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatChipsModule } from '@angular/material/chips';
+
 import { registerLocaleData } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 import localeEs from '@angular/common/locales/es';
 import localeEn from '@angular/common/locales/en';
+import { MapComponent } from './map/map.component';
 
 registerLocaleData(localeEs);
 registerLocaleData(localeEn);
@@ -40,7 +44,8 @@ export function BrowserLanguage() {
     InformationComponent,
     CountriesComponent,
     AboutComponent,
-    DashboardComponent
+    DashboardComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,7 @@ export function BrowserLanguage() {
     HttpClientModule,
     BrowserAnimationsModule,
     NgxChartsModule,
+    GoogleChartsModule.forRoot('AIzaSyC0sZArqIvT7so2JX3dGkMK2wMrZ3vIKeY'),
     TranslateModule.forRoot({
       defaultLanguage: BrowserLanguage(),
       loader: {
@@ -59,7 +65,8 @@ export function BrowserLanguage() {
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatChipsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en'},

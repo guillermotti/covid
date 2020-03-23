@@ -124,6 +124,15 @@
     </div>
     <div class="charts">
       <div>
+        <p>{{ "DASHBOARD.REPRESENT" | translate }}: </p>
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip>{{ "DASHBOARD.TOTAL" | translate }}</mat-chip>
+          <mat-chip>{{ "DASHBOARD.DECEASED" | translate }}</mat-chip>
+          <mat-chip selected>{{ "DASHBOARD.ACTIVE" | translate }}</mat-chip>
+          <mat-chip>{{ "DASHBOARD.RECOVERED" | translate }}</mat-chip>
+        </mat-chip-list>
+      </div>
+      <div>
         <ngx-charts-bar-horizontal
           [view]="horizontalBarChart1.view"
           [scheme]="horizontalBarChart1.colorScheme"
