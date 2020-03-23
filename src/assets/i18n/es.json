@@ -2,7 +2,8 @@
     "HEADER": {
         "INFO": "Información",
         "COUNTRIES": "Países",
-        "ABOUT": "Sobre Nosotros"
+        "ABOUT": "Sobre Nosotros",
+        "DONATE": "Donate"
     },
     "DASHBOARD": {
         "SEARCH": "Buscar",
@@ -15,6 +16,7 @@
         "PROGRESSION": "Progresión del virus por país",
         "ACTIVE": "Active",
         "COUNTRY": "Country",
-        "SEARCH_TABLE": "Búsqueda por país"
+        "SEARCH_TABLE": "Búsqueda por país",
+        "REPRESENT": "Representar por"
     }
 }

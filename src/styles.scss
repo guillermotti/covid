@@ -55,11 +55,13 @@ $mat-gt-xl: "screen and (min-width: 1920px)";
 
 html,
 body {
-  height: 100%;
   box-sizing: border-box;
 }
 body {
   margin: 0;
+  app-root {
+    display: block;
+  }
 }
 
 body * {
@@ -99,6 +101,20 @@ header {
   img.github {
     width: 32px;
   }
+}
+
+header + button {
+  border-style: none;
+  padding: 12px 20px;
+  background-color: #ff813f;
+  display: inline-flex;
+  align-items: center;
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  font-size: 20px;
+  color: #fff;
+  z-index: 500;
 }
 
 app-dashboard,
@@ -306,6 +322,13 @@ footer {
             line-height: 26px;
             margin: 0;
           }
+          img {
+            left: 12px;
+            bottom: 12px;
+            width: 28px;
+            right: unset;
+          }
+          
         }
       }
     }

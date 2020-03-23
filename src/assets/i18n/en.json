@@ -2,7 +2,8 @@
     "HEADER": {
         "INFO": "Information",
         "COUNTRIES": "Countries",
-        "ABOUT": "About"
+        "ABOUT": "About",
+        "DONATE": "Donate"
     },
     "DASHBOARD": {
         "SEARCH": "Search",
@@ -15,6 +16,7 @@
         "PROGRESSION": "Progression by country",
         "ACTIVE": "Active",
         "COUNTRY": "Country",
-        "SEARCH_TABLE": "Search by country"
+        "SEARCH_TABLE": "Search by country",
+        "REPRESENT": "Represent by"
     }
 }
