@@ -130,7 +130,7 @@
     <div class="charts">
       <div>
         <p>{{ "DASHBOARD.REPRESENT" | translate }}: </p>
-        <mat-chip-list aria-label="Fish selection">
+        <mat-chip-list>
           <mat-chip (click)="select('cases')" [selected]="isTotalSelected">{{ "DASHBOARD.TOTAL" | translate }}
           </mat-chip>
           <mat-chip (click)="select('deaths')" [selected]="isDeceasedSelected">{{ "DASHBOARD.DECEASED" | translate }}
@@ -142,11 +142,22 @@
         </mat-chip-list>
       </div>
       <div>
-        <ngx-charts-bar-horizontal [view]="horizontalBarChart.view" [scheme]="horizontalBarChart.colorScheme"
-          [results]="horizontalBarChart.data" [gradient]="horizontalBarChart.gradient"
-          [xAxis]="horizontalBarChart.showXAxis" [yAxis]="horizontalBarChart.showYAxis"
-          [showXAxisLabel]="horizontalBarChart.showXAxisLabel" [xAxisLabel]="horizontalBarChart.xAxisLabel"
-          (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+        <p>{{ "DASHBOARD.CHART_TYPE" | translate }}: </p>
+        <mat-chip-list>
+          <mat-chip (click)="selectChart('bar')" [selected]="isBarSelected">{{ "DASHBOARD.BAR" | translate }}
+          </mat-chip>
+          <mat-chip (click)="selectChart('pie')" [selected]="isPieSelected">{{ "DASHBOARD.PIE" | translate }}
+          </mat-chip>
+          <mat-chip (click)="selectChart('gauge')" [selected]="isGaugeSelected">{{ "DASHBOARD.GAUGE" | translate }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <div>
+        <ngx-charts-bar-horizontal [scheme]="horizontalBarChart.colorScheme" [results]="horizontalBarChart.data"
+          [gradient]="horizontalBarChart.gradient" [xAxis]="horizontalBarChart.showXAxis"
+          [yAxis]="horizontalBarChart.showYAxis" [showXAxisLabel]="horizontalBarChart.showXAxisLabel"
+          [xAxisLabel]="horizontalBarChart.xAxisLabel" (select)="onSelect($event)" (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)">
         </ngx-charts-bar-horizontal>
       </div>
     </div>

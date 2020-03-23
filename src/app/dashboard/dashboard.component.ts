@@ -22,6 +22,9 @@ export class DashboardComponent implements OnInit {
   isDeceasedSelected: boolean = false;
   isActiveSelected: boolean = false;
   isRecoveredSelected: boolean = false;
+  isBarSelected: boolean = true;
+  isGaugeSelected: boolean = false;
+  isPieSelected: boolean = false
   data: any;
 
   displayedColumns: string[] = ['country', 'confirmed', 'deceased', 'active', 'recovered'];
@@ -31,7 +34,6 @@ export class DashboardComponent implements OnInit {
 
   //Charts
   horizontalBarChart = {
-    view: [700, 400],
     showXAxis: true,
     showYAxis: true,
     gradient: false,
@@ -145,6 +147,10 @@ export class DashboardComponent implements OnInit {
     const number = event.value;
     this.horizontalBarChart.selected = number;
     this.setHorizontalBarChart(this.horizontalBarChart, this.data, 'country', this.horizontalBarChart.type, number);
+  }
+
+  selectChart(type: string) {
+
   }
 
 }

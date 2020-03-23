@@ -3,7 +3,8 @@
         "INFO": "Información",
         "COUNTRIES": "Países",
         "ABOUT": "Sobre Nosotros",
-        "DONATE": "Donate"
+        "DONATE": "Donate",
+        "MAP": "Mapa global"
     },
     "DASHBOARD": {
         "SEARCH": "Buscar",

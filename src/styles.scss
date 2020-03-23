@@ -226,6 +226,9 @@ app-dashboard {
 
       &.countries-info-table {
         div.table {
+          & > div {
+            overflow: auto;
+          }
           table {
             width: 100%;
             button.mat-sort-header-button {
@@ -269,6 +272,9 @@ app-dashboard {
           margin-top: 86px;
           margin-left: -34px;
           & > div {
+            &:last-child {
+              height: 400px;
+            }
             margin-bottom: 40px;
           }
         }
