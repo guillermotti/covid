@@ -143,7 +143,7 @@ app-dashboard {
   div.general-info {
     width: 100%;
     margin-top: 54px;
-    margin-bottom: 54px;
+    margin-bottom: 84px;
     div.section-title {
       margin-bottom: 40px;
       h1 {
@@ -169,6 +169,7 @@ app-dashboard {
         border-radius: 16px;
         padding: 32px 26px;
         box-sizing: border-box;
+        position: relative;
         &:nth-child(1) {
           background-color: #a3aabb;
         }
@@ -188,6 +189,11 @@ app-dashboard {
           font-size: 26px;
           font-weight: 300;
         }
+        img {
+          position: absolute;
+          right: 26px;
+          width: 40px;
+        }
       }
     }
   }
@@ -196,10 +202,60 @@ app-dashboard {
     display: flex;
     justify-content: space-between;
     & > div {
-      width: calc(100% - 4%);
+      width: calc(50% - 4%);
       h1 {
         width: 51%;
         font-size: 30px;
+      }
+
+      &.countries-info-table {
+        div.table {
+          table {
+            width: 100%;
+            button.mat-sort-header-button {
+              font-size: 17px;
+              color: #212121;
+            }
+            tbody tr {
+              &:hover {
+                cursor: pointer;
+              }
+
+              td {
+                font-size: 15px;
+                color: #818181;
+                font-weight: 300;
+
+                &:first-of-type {
+                  color: #3987fb;
+                  font-weight: 500;
+                }
+              }
+            }
+          }
+          & > mat-form-field {
+            width: calc(100% - 48px);
+            margin: 36px 24px;
+          }
+          & > div {
+            box-shadow: none;
+          }
+          mat-form-field {
+            font-size: 16px;
+          }
+        }
+      }
+
+      &.countries-info-chart {
+        div.charts {
+          display: flex;
+          flex-direction: column;
+          margin-top: 86px;
+          margin-left: -34px;
+          & > div {
+            margin-bottom: 40px;
+          }
+        }
       }
     }
   }
@@ -236,6 +292,7 @@ footer {
           padding: 12px 14px;
           flex-direction: column-reverse;
           justify-content: space-between;
+          position: relative;
           h2 {
             font-size: 43px;
             font-weight: 300;

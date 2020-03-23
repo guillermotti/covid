@@ -14,6 +14,7 @@
         "INFECTED": "Most infected countries",
         "PROGRESSION": "Progression by country",
         "ACTIVE": "Active",
-        "COUNTRY": "Country"
+        "COUNTRY": "Country",
+        "SEARCH_TABLE": "Search by country"
     }
 }

@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
     showYAxisLabel: true,
     xAxisLabel: 'Population',
     colorScheme: {
-      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+      domain: ['#3F99E2', '#00072D', '#9DB5B2', '#074F57', '#DAF0EE']
     },
     data: []
   }

@@ -14,6 +14,7 @@
         "INFECTED": "Países con mayor número de infectados",
         "PROGRESSION": "Progresión del virus por país",
         "ACTIVE": "Active",
-        "COUNTRY": "Country"
+        "COUNTRY": "Country",
+        "SEARCH_TABLE": "Búsqueda por país"
     }
 }
