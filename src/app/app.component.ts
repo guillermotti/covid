@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'covid';
-  constructor(private httpClient: HttpClient, translate: TranslateService) {
+  constructor(translate: TranslateService, private router: Router) {
     // this language will be used as a fallback when a translation isn't found in the current language
     // translate.setDefaultLang('es');
     // the lang to use, if the lang isn't available, it will use the current loader to get them
@@ -18,5 +18,13 @@ export class AppComponent {
 
   onActivate() {
     window.scroll(0, 0);
+  }
+
+  navigateTo(screen: string) {
+    if (screen === 'github') {
+      window.open('https://github.com/guillermotti/covid');
+    } else {
+      this.router.navigateByUrl(screen);
+    }
   }
 }

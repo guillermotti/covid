@@ -1,17 +1,17 @@
 <header>
   <div>
-    <img src="assets/img/covid_logo.svg" />
+    <img src="assets/img/covid_logo.svg" (click)="navigateTo('index')"/>
     <div class="menu-links">
-      <span>{{ "HEADER.INFO" | translate }}</span>
-      <span>{{ "HEADER.COUNTRIES" | translate }}</span>
-      <span>{{ "HEADER.ABOUT" | translate }}</span>
+      <span (click)="navigateTo('information')">{{ "HEADER.INFO" | translate }}</span>
+      <span (click)="navigateTo('countries')">{{ "HEADER.COUNTRIES" | translate }}</span>
+      <span (click)="navigateTo('about')">{{ "HEADER.ABOUT" | translate }}</span>
     </div>
   </div>
   <div>
-    <img class="github" src="assets/img/github.svg" />
+    <img class="github" src="assets/img/github.svg" (click)="navigateTo('github')"/>
   </div>
 </header>
 <router-outlet (activate)="onActivate()"></router-outlet>
 <footer>
-  
+
 </footer>

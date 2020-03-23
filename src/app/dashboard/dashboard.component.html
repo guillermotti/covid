@@ -10,12 +10,12 @@
         <h1>
             {{ "DASHBOARD.GENERAL_INFO" | translate }}
         </h1>
-        <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}: {{updated | date:'full':'':'en'}}</span>
+        <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}: {{updated | date:'full':'':language}}</span>
     </div>
     <div div class="section-info">
         <div>
             <h2>
-                {{total_confirmed | number:'':'en'}}
+                {{total_confirmed | number:'':language}}
             </h2>
             <h3>
                 {{ "DASHBOARD.TOTAL" | translate }}
@@ -23,7 +23,7 @@
         </div>
         <div>
             <h2>
-                {{total_deceased | number:'':'en'}}
+                {{total_deceased | number:'':language}}
             </h2>
             <h3>
                 {{ "DASHBOARD.DECEASED" | translate }}
@@ -31,7 +31,7 @@
         </div>
         <div>
             <h2>
-                {{total_recovered | number:'':'en'}}
+                {{total_recovered | number:'':language}}
             </h2>
             <h3>
                 {{ "DASHBOARD.RECOVERED" | translate }}
@@ -74,25 +74,25 @@
             <!-- Progress Column -->
             <ng-container matColumnDef="confirmed">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.TOTAL" | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.cases | number:'':'en'}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.cases | number:'':language}} </td>
             </ng-container>
 
             <!-- Name Column -->
             <ng-container matColumnDef="deceased">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.DECEASED" | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.deaths | number:'':'en'}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.deaths | number:'':language}} </td>
             </ng-container>
 
             <!-- Name Column -->
             <ng-container matColumnDef="active">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.ACTIVE" | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.active | number:'':'en'}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.active | number:'':language}} </td>
             </ng-container>
 
             <!-- Color Column -->
             <ng-container matColumnDef="recovered">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.RECOVERED" | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.recovered | number:'':'en'}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.recovered | number:'':language}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
