@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { registerLocaleData } from '@angular/common';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import localeEs from '@angular/common/locales/es';
 import localeEn from '@angular/common/locales/en';
@@ -46,6 +47,7 @@ export function BrowserLanguage() {
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxChartsModule,
     TranslateModule.forRoot({
       defaultLanguage: BrowserLanguage(),
       loader: {

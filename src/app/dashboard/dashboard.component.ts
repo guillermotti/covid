@@ -20,9 +20,42 @@ export class DashboardComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'confirmed', 'deceased', 'active', 'recovered'];
   dataSource: MatTableDataSource<any>;
-
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  //Charts
+  horizontalBarChart1 = {
+    view: [700, 400],
+    showXAxis: true,
+    showYAxis: true,
+    gradient: false,
+    showLegend: true,
+    showXAxisLabel: true,
+    yAxisLabel: 'Country',
+    showYAxisLabel: true,
+    xAxisLabel: 'Population',
+    colorScheme: {
+      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    },
+    data: []
+  }
+
+  horizontalBarChart2 = {
+    view: [700, 400],
+    showXAxis: true,
+    showYAxis: true,
+    gradient: false,
+    showLegend: true,
+    showXAxisLabel: true,
+    yAxisLabel: 'Country',
+    showYAxisLabel: true,
+    xAxisLabel: 'Population',
+    colorScheme: {
+      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    },
+    data: []
+  }
+
 
   constructor(private httpClient: HttpClient, private languageService: LanguageService) {
     this.languageService.selectLanguage.subscribe(language => {
@@ -35,9 +68,12 @@ export class DashboardComponent implements OnInit {
       this.updated = new Date(response['updated']);
     });
     this.httpClient.get('https://corona.lmao.ninja/countries').subscribe(response => {
-      this.dataSource = new MatTableDataSource(response as []);
+      const data = response as [];
+      this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.setHorizontalBarChart(this.horizontalBarChart1, data, 'country', 'cases');
+      this.setHorizontalBarChart(this.horizontalBarChart2, data, 'country', 'deaths');
     });
   }
 
@@ -51,6 +87,29 @@ export class DashboardComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  setHorizontalBarChart(chart: object, items: [], yLabel: string, xLabel: string) {
+    chart['data'] = [];
+    items.sort((a, b) => { return b[xLabel] - a[xLabel] });
+    items.map(item => {
+      if (chart['data'].length < 5) {
+        chart['data'].push({ name: item[yLabel], value: item[xLabel] });
+      }
+    })
+    Object.assign(this, chart['data']);
+  }
+
+  onSelect(data): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  onActivate(data): void {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data): void {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
 }

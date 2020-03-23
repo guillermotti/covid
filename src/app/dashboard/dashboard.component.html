@@ -10,7 +10,8 @@
         <h1>
             {{ "DASHBOARD.GENERAL_INFO" | translate }}
         </h1>
-        <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}: {{updated | date:'full':'':language}}</span>
+        <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}:
+            {{updated | date:'full':'':language}}</span>
     </div>
     <div div class="section-info">
         <div>
@@ -46,6 +47,57 @@
                 {{ "DASHBOARD.INFECTED" | translate }}
             </h1>
         </div>
+        <div class="table">
+            <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+            </mat-form-field>
+
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort>
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.COUNTRY" | translate }}
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{row.country}} </td>
+                    </ng-container>
+
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="confirmed">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.TOTAL" | translate }} </th>
+                        <td mat-cell *matCellDef="let row"> {{row.cases | number:'':language}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="deceased">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.DECEASED" | translate }}
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{row.deaths | number:'':language}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="active">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.ACTIVE" | translate }}
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{row.active | number:'':language}} </td>
+                    </ng-container>
+
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="recovered">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.RECOVERED" | translate }}
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{row.recovered | number:'':language}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+            </div>
+        </div>
     </div>
     <div class="countries-info-chart">
         <div class="section-title">
@@ -53,53 +105,27 @@
                 {{ "DASHBOARD.PROGRESSION" | translate }}
             </h1>
         </div>
-    </div>
-</div>
-
-<div class="table">
-    <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
-    </mat-form-field>
-
-    <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
-
-            <!-- ID Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.COUNTRY" | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.country}} </td>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="confirmed">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.TOTAL" | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.cases | number:'':language}} </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="deceased">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.DECEASED" | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.deaths | number:'':language}} </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="active">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.ACTIVE" | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.active | number:'':language}} </td>
-            </ng-container>
-
-            <!-- Color Column -->
-            <ng-container matColumnDef="recovered">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "DASHBOARD.RECOVERED" | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.recovered | number:'':language}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-            </tr>
-        </table>
-
-        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+        <div class="charts">
+            <div>
+                <ngx-charts-bar-horizontal [view]="horizontalBarChart1.view" [scheme]="horizontalBarChart1.colorScheme"
+                    [results]="horizontalBarChart1.data" [gradient]="horizontalBarChart1.gradient"
+                    [xAxis]="horizontalBarChart1.showXAxis" [yAxis]="horizontalBarChart1.showYAxis"
+                    [legend]="horizontalBarChart1.showLegend" [showXAxisLabel]="horizontalBarChart1.showXAxisLabel"
+                    [showYAxisLabel]="horizontalBarChart1.showYAxisLabel" [xAxisLabel]="horizontalBarChart1.xAxisLabel"
+                    [yAxisLabel]="horizontalBarChart1.yAxisLabel" (select)="onSelect($event)"
+                    (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+                </ngx-charts-bar-horizontal>
+            </div>
+            <div>
+                <ngx-charts-bar-horizontal [view]="horizontalBarChart2.view" [scheme]="horizontalBarChart2.colorScheme"
+                    [results]="horizontalBarChart2.data" [gradient]="horizontalBarChart2.gradient"
+                    [xAxis]="horizontalBarChart2.showXAxis" [yAxis]="horizontalBarChart2.showYAxis"
+                    [legend]="horizontalBarChart2.showLegend" [showXAxisLabel]="horizontalBarChart2.showXAxisLabel"
+                    [showYAxisLabel]="horizontalBarChart2.showYAxisLabel" [xAxisLabel]="horizontalBarChart2.xAxisLabel"
+                    [yAxisLabel]="horizontalBarChart2.yAxisLabel" (select)="onSelect($event)"
+                    (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+                </ngx-charts-bar-horizontal>
+            </div>
+        </div>
     </div>
 </div>
