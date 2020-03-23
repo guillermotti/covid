@@ -10,7 +10,6 @@ import { LanguageService } from '../language.service';
 export class MapComponent implements OnInit {
 
   language: string = navigator.language;
-  type = 'GeoChart';
   data = [];
   isLoaded = false;
 
