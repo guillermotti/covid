@@ -157,7 +157,7 @@
         <ngx-charts-bar-horizontal [scheme]="horizontalBarChart.colorScheme" [results]="horizontalBarChart.data"
           [gradient]="horizontalBarChart.gradient" [xAxis]="horizontalBarChart.showXAxis"
           [yAxis]="horizontalBarChart.showYAxis" [showXAxisLabel]="horizontalBarChart.showXAxisLabel"
-          [xAxisLabel]="horizontalBarChart.xAxisLabel" (select)="onSelect($event)" (activate)="onActivate($event)"
+          xAxisLabel="{{ 'DASHBOARD.PERSON' | translate }}" (select)="onSelect($event)" (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)">
         </ngx-charts-bar-horizontal>
       </div>

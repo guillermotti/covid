@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit {
     gradient: false,
     showLegend: true,
     showXAxisLabel: true,
-    xAxisLabel: '',
     colorScheme: {
       domain: ['#3F99E2', '#00072D', '#9DB5B2', '#074F57', '#DAF0EE']
     },
@@ -53,7 +52,6 @@ export class DashboardComponent implements OnInit {
     this.languageService.selectLanguage.subscribe(language => {
       this.language = language;
     });
-    this.horizontalBarChart.xAxisLabel = this.translateService.instant('DASHBOARD.PERSON');
     for (let i = 2; i <= 20; i++) {
       this.horizontalBarChart.chartNumberItems.push(i);
     }

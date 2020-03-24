@@ -22,7 +22,7 @@
         "BAR": "Bar",
         "PIE": "Pie",
         "GAUGE": "Gauge",
-        "PERSON": "Person number",
+        "PERSON": "Number of people",
         "CHART_TYPE": "Chart type",
         "AMOUNT": "Amount of data to show"
     }
