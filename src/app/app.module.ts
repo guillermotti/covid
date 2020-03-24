@@ -28,6 +28,7 @@ import localeEn from '@angular/common/locales/en';
 import { MapComponent } from './map/map.component';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 registerLocaleData(localeEs);
 registerLocaleData(localeEn);
@@ -72,7 +73,8 @@ export function BrowserLanguage() {
     MatSortModule,
     MatChipsModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en'},

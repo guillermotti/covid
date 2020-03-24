@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LanguageService } from '../language.service';
-import { TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
     data: []
   }
 
-  constructor(private httpClient: HttpClient, private languageService: LanguageService, private translateService: TranslateService) {
+  constructor(private httpClient: HttpClient, private languageService: LanguageService, private snackBar: MatSnackBar) {
     this.languageService.selectLanguage.subscribe(language => {
       this.language = language;
     });
@@ -107,6 +107,17 @@ export class DashboardComponent implements OnInit {
 
   onSelect(data): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    if (navigator.userAgent.match(/Android/i)
+      || navigator.userAgent.match(/webOS/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPod/i)
+      || navigator.userAgent.match(/BlackBerry/i)
+      || navigator.userAgent.match(/Windows Phone/i)) {
+      this.snackBar.open(data.name, data.value, {
+        duration: 4000,
+      });
+    }
   }
 
   onActivate(data): void {
