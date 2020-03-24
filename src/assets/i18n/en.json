@@ -23,6 +23,7 @@
         "PIE": "Pie",
         "GAUGE": "Gauge",
         "PERSON": "Person number",
-        "CHART_TYPE": "Chart type"
+        "CHART_TYPE": "Chart type",
+        "AMOUNT": "Amount of data to show"
     }
 }

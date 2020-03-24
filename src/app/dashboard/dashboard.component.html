@@ -119,16 +119,17 @@
       <h1>
         {{ "DASHBOARD.PROGRESSION" | translate }}
       </h1>
+    </div>
+    <div class="charts">
       <mat-form-field>
-        <mat-select [(ngModel)]="horizontalBarChart.selected" (selectionChange)="changeChart($event)">
+        <mat-label>{{ "DASHBOARD.AMOUNT" | translate }}</mat-label>
+        <mat-select [(ngModel)]="horizontalBarChart.selected" (selectionChange)="changeChart($event)" >
           <mat-option *ngFor="let number of horizontalBarChart.chartNumberItems; index as i" [value]="number">
             {{number}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
-    <div class="charts">
-      <div>
+      <div class="info-representation">
         <p>{{ "DASHBOARD.REPRESENT" | translate }}: </p>
         <mat-chip-list>
           <mat-chip (click)="select('cases')" [selected]="isTotalSelected">{{ "DASHBOARD.TOTAL" | translate }}
@@ -141,7 +142,7 @@
             {{ "DASHBOARD.RECOVERED" | translate }}</mat-chip>
         </mat-chip-list>
       </div>
-      <div>
+      <div class="type-of-chart">
         <p>{{ "DASHBOARD.CHART_TYPE" | translate }}: </p>
         <mat-chip-list>
           <mat-chip (click)="selectChart('bar')" [selected]="isBarSelected">{{ "DASHBOARD.BAR" | translate }}

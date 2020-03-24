@@ -23,6 +23,7 @@
         "PIE": "Tarta",
         "GAUGE": "Gauge",
         "PERSON": "Número de personas",
-        "CHART_TYPE": "Tipo de gráfico"
+        "CHART_TYPE": "Tipo de gráfico",
+        "AMOUNT": "Cantidad de datos a mostrar"
     }
 }
