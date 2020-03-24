@@ -236,6 +236,7 @@ app-dashboard {
             button.mat-sort-header-button {
               font-size: 17px;
               color: #212121;
+              text-align: left;
             }
             tbody tr {
               &:hover {
@@ -272,6 +273,24 @@ app-dashboard {
       }
 
       &.countries-info-chart {
+        .section-title p {
+          font-size: 16px;
+          margin: 36px 0;
+        }
+        div.chart-per-country {
+          display: none;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin-top: 100px;
+
+          & > div {
+            width: calc(100% / 3 - 26.6px);
+            background-color: #8181811a;
+            height: 222px;
+            margin-bottom: 40px;
+            border-radius: 16px;
+          }
+        }
         div.charts {
           width: 100%;
           display: flex;
@@ -283,15 +302,18 @@ app-dashboard {
             margin-bottom: 40px;
             &.info-representation {
               margin-top: 20px;
-              margin-left: 24px;
             }
             &.type-of-chart {
-              margin-left: 24px;
             }
           }
           & > mat-form-field {
             margin: 36px 24px;
             font-size: 16px;
+          }
+          mat-chip.mat-chip-selected {
+            background-color: #45d99b;
+            font-weight: 400;
+            letter-spacing: 0.4px;
           }
         }
       }
@@ -310,6 +332,8 @@ footer {
   }
   app-dashboard {
     div.general-info {
+      margin-top: 40px;
+      margin-bottom: 64px;
       div.section-title {
         h1 {
           font-size: 24px;
@@ -363,25 +387,50 @@ footer {
           line-height: 26px;
         }
       }
-      div.table {
-        th.mat-header-cell:first-of-type,
-        td.mat-cell:first-of-type,
-        td.mat-footer-cell:first-of-type {
-          padding-left: 0px;
-          padding-right: 12px;
-        }
-        th.mat-header-cell:last-of-type,
-        td.mat-cell:last-of-type,
-        td.mat-footer-cell:last-of-type {
-          padding-right: 0;
-        }
-        div.mat-paginator-page-size-label {
-          display: none;
+      div.countries-info-table {
+        div.table {
+          th.mat-header-cell:first-of-type,
+          td.mat-cell:first-of-type,
+          td.mat-footer-cell:first-of-type {
+            padding-left: 0px;
+            padding-right: 12px;
+          }
+          th.mat-header-cell:last-of-type,
+          td.mat-cell:last-of-type,
+          td.mat-footer-cell:last-of-type {
+            padding-right: 0;
+          }
+          div.mat-paginator-page-size-label {
+            display: none;
+          }
+          & > mat-form-field {
+            width: 100%;
+            margin: 0 0 36px 0;
+          }
         }
       }
 
       div.countries-info-chart {
         margin-top: 160px;
+        div.charts {
+          display: none;
+          mat-form-field {
+            margin: 36px 0;
+          }
+          div.info-representation,
+          div.type-of-chart {
+            margin-left: 0;
+          }
+        }
+        div.chart-per-country {
+          margin-top: 40px;
+          display: flex;
+          & > div {
+            width: calc(100% / 2 - 8.6px);
+            height: 180px;
+            margin-bottom: 20px;
+          }
+        }
       }
     }
   }

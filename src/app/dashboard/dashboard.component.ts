@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
     showLegend: true,
     showXAxisLabel: true,
     colorScheme: {
-      domain: ['#3F99E2', '#00072D', '#9DB5B2', '#074F57', '#DAF0EE']
+      domain: ['#40486a', '#4fd0f9', '#8f99af', '#e6eef4', '#95a7f6', "#6e7cb6", "#485177", "#313751", "#3b9bb9", "#276579", "#4fd0f9", "#12303a", "5b616f", "cedcfb", "8f99af", "aab0b4", "99acbc" ]
     },
     data: [],
     chartNumberItems: [],

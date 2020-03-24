@@ -10,15 +10,17 @@
     <h1>
       {{ "DASHBOARD.GENERAL_INFO" | translate }}
     </h1>
-    <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}:
-      {{ updated | date: "full":"":language }}</span>
+    <span class="last-update"
+      >{{ "DASHBOARD.LAST_UPDATE" | translate }}:
+      {{ updated | date: "full":"":language }}</span
+    >
   </div>
   <div div class="section-info">
     <div>
       <h2>
         {{ total_confirmed | number: "":language }}
       </h2>
-      <img src="../../assets/img/virus.svg">
+      <img src="../../assets/img/virus.svg" />
       <h3>
         {{ "DASHBOARD.TOTAL" | translate }}
       </h3>
@@ -27,7 +29,7 @@
       <h2>
         {{ total_deceased | number: "":language }}
       </h2>
-      <img src="../../assets/img/deceased.svg">
+      <img src="../../assets/img/deceased.svg" style="width:38px;" />
       <h3>
         {{ "DASHBOARD.DECEASED" | translate }}
       </h3>
@@ -36,7 +38,7 @@
       <h2>
         {{ total_recovered | number: "":language }}
       </h2>
-      <img src="../../assets/img/recovered.svg">
+      <img src="../../assets/img/recovered.svg" />
       <h3>
         {{ "DASHBOARD.RECOVERED" | translate }}
       </h3>
@@ -119,46 +121,85 @@
       <h1>
         {{ "DASHBOARD.PROGRESSION" | translate }}
       </h1>
+      <p>{{ "DASHBOARD.CHARTDESCRIPTION" | translate }}</p>
+    </div>
+    <div class="chart-per-country">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
     <div class="charts">
-      <mat-form-field>
-        <mat-label>{{ "DASHBOARD.AMOUNT" | translate }}</mat-label>
-        <mat-select [(ngModel)]="horizontalBarChart.selected" (selectionChange)="changeChart($event)" >
-          <mat-option *ngFor="let number of horizontalBarChart.chartNumberItems; index as i" [value]="number">
-            {{number}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
       <div class="info-representation">
-        <p>{{ "DASHBOARD.REPRESENT" | translate }}: </p>
+        <p>{{ "DASHBOARD.REPRESENT" | translate }}:</p>
         <mat-chip-list>
-          <mat-chip (click)="select('cases')" [selected]="isTotalSelected">{{ "DASHBOARD.TOTAL" | translate }}
+          <mat-chip (click)="select('cases')" [selected]="isTotalSelected"
+            >{{ "DASHBOARD.TOTAL" | translate }}
           </mat-chip>
-          <mat-chip (click)="select('deaths')" [selected]="isDeceasedSelected">{{ "DASHBOARD.DECEASED" | translate }}
+          <mat-chip (click)="select('deaths')" [selected]="isDeceasedSelected"
+            >{{ "DASHBOARD.DECEASED" | translate }}
           </mat-chip>
-          <mat-chip (click)="select('active')" [selected]="isActiveSelected">{{ "DASHBOARD.ACTIVE" | translate }}
+          <mat-chip (click)="select('active')" [selected]="isActiveSelected"
+            >{{ "DASHBOARD.ACTIVE" | translate }}
           </mat-chip>
-          <mat-chip (click)="select('recovered')" [selected]="isRecoveredSelected">
-            {{ "DASHBOARD.RECOVERED" | translate }}</mat-chip>
+          <mat-chip
+            (click)="select('recovered')"
+            [selected]="isRecoveredSelected"
+          >
+            {{ "DASHBOARD.RECOVERED" | translate }}</mat-chip
+          >
         </mat-chip-list>
       </div>
       <div class="type-of-chart">
-        <p>{{ "DASHBOARD.CHART_TYPE" | translate }}: </p>
-        <mat-chip-list>
-          <mat-chip (click)="selectChart('bar')" [selected]="isBarSelected">{{ "DASHBOARD.BAR" | translate }}
-          </mat-chip>
-          <mat-chip (click)="selectChart('pie')" [selected]="isPieSelected">{{ "DASHBOARD.PIE" | translate }}
-          </mat-chip>
-          <mat-chip (click)="selectChart('gauge')" [selected]="isGaugeSelected">{{ "DASHBOARD.GAUGE" | translate }}
-          </mat-chip>
-        </mat-chip-list>
+        <div>
+          <p>{{ "DASHBOARD.CHART_TYPE" | translate }}:</p>
+          <mat-chip-list>
+            <mat-chip (click)="selectChart('bar')" [selected]="isBarSelected"
+              >{{ "DASHBOARD.BAR" | translate }}
+            </mat-chip>
+            <mat-chip (click)="selectChart('pie')" [selected]="isPieSelected"
+              >{{ "DASHBOARD.PIE" | translate }}
+            </mat-chip>
+            <mat-chip
+              (click)="selectChart('gauge')"
+              [selected]="isGaugeSelected"
+              >{{ "DASHBOARD.GAUGE" | translate }}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
       </div>
+      <mat-form-field>
+        <mat-label>{{ "DASHBOARD.AMOUNT" | translate }}</mat-label>
+        <mat-select
+          [(ngModel)]="horizontalBarChart.selected"
+          (selectionChange)="changeChart($event)"
+        >
+          <mat-option
+            *ngFor="
+              let number of horizontalBarChart.chartNumberItems;
+              index as i
+            "
+            [value]="number"
+          >
+            {{ number }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <div>
-        <ngx-charts-bar-horizontal [scheme]="horizontalBarChart.colorScheme" [results]="horizontalBarChart.data"
-          [gradient]="horizontalBarChart.gradient" [xAxis]="horizontalBarChart.showXAxis"
-          [yAxis]="horizontalBarChart.showYAxis" [showXAxisLabel]="horizontalBarChart.showXAxisLabel"
-          xAxisLabel="{{ 'DASHBOARD.PERSON' | translate }}" (select)="onSelect($event)" (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)">
+        <ngx-charts-bar-horizontal
+          [scheme]="horizontalBarChart.colorScheme"
+          [results]="horizontalBarChart.data"
+          [gradient]="horizontalBarChart.gradient"
+          [xAxis]="horizontalBarChart.showXAxis"
+          [yAxis]="horizontalBarChart.showYAxis"
+          [showXAxisLabel]="horizontalBarChart.showXAxisLabel"
+          xAxisLabel="{{ 'DASHBOARD.PERSON' | translate }}"
+          (select)="onSelect($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
+        >
         </ngx-charts-bar-horizontal>
       </div>
     </div>

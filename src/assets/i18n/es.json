@@ -15,7 +15,7 @@
         "RECOVERED": "Recuperados",
         "INFECTED": "Países con mayor número de infectados",
         "PROGRESSION": "Progresión del virus por país",
-        "ACTIVE": "Active",
+        "ACTIVE": "Activos",
         "COUNTRY": "Country",
         "SEARCH_TABLE": "Búsqueda por país",
         "REPRESENT": "Representar por",
@@ -24,6 +24,7 @@
         "GAUGE": "Gauge",
         "PERSON": "Número de personas",
         "CHART_TYPE": "Tipo de gráfico",
-        "AMOUNT": "Cantidad de datos a mostrar"
+        "AMOUNT": "Cantidad de datos a mostrar",
+        "CHARTDESCRIPTION": "En esta sección se muestra el progreso del virus en distintos países. Puedes cambiar los valores de la gráfica, así como el tipo de gráfico de representación de los datos."
     }
 }
