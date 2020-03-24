@@ -18,6 +18,11 @@
         "ACTIVE": "Active",
         "COUNTRY": "Country",
         "SEARCH_TABLE": "Search by country",
-        "REPRESENT": "Represent by"
+        "REPRESENT": "Represent by",
+        "BAR": "Bar",
+        "PIE": "Pie",
+        "GAUGE": "Gauge",
+        "PERSON": "Person number",
+        "CHART_TYPE": "Chart type"
     }
 }

@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     this.languageService.selectLanguage.subscribe(language => {
       this.language = language;
     });
-    this.horizontalBarChart.xAxisLabel = this.translateService.instant('DASHBOARD.PERSON')
+    this.horizontalBarChart.xAxisLabel = this.translateService.instant('DASHBOARD.PERSON');
     for (let i = 2; i <= 20; i++) {
       this.horizontalBarChart.chartNumberItems.push(i);
     }
