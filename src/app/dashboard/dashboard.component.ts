@@ -25,7 +25,14 @@ export class DashboardComponent implements OnInit {
   isBarSelected: boolean = true;
   isGaugeSelected: boolean = false;
   isPieSelected: boolean = false
-  data: any;
+  data: any[];
+  chart: string = 'bar';
+  colorScheme: any = {
+    domain: ['#40486a', '#4fd0f9', '#8f99af', '#95a7f6', "#6e7cb6", "#485177", "#313751", "#3b9bb9", "#276579", "#4fd0f9", "#12303a", "5b616f", "cedcfb", "8f99af", "aab0b4", "99acbc"]
+  }
+  chartNumberItems: any[] = [];
+  selected: number = 5;
+  chartType: string = 'cases';
 
   displayedColumns: string[] = ['country', 'confirmed', 'deceased', 'active', 'recovered'];
   dataSource: MatTableDataSource<any>;
@@ -36,16 +43,19 @@ export class DashboardComponent implements OnInit {
   horizontalBarChart = {
     showXAxis: true,
     showYAxis: true,
-    gradient: false,
-    showLegend: true,
     showXAxisLabel: true,
-    colorScheme: {
-      domain: ['#40486a', '#4fd0f9', '#8f99af', '#e6eef4', '#95a7f6', "#6e7cb6", "#485177", "#313751", "#3b9bb9", "#276579", "#4fd0f9", "#12303a", "5b616f", "cedcfb", "8f99af", "aab0b4", "99acbc" ]
-    },
-    data: [],
-    chartNumberItems: [],
-    selected: 5,
-    type: 'cases'
+    showDataLabel: true,
+    data: []
+  }
+
+  pieChart = {
+    showLabels: true,
+    isDoughnut: false,
+    data: []
+  }
+
+  gaugeChart = {
+    data: []
   }
 
   constructor(private httpClient: HttpClient, private languageService: LanguageService, private translateService: TranslateService) {
@@ -53,9 +63,8 @@ export class DashboardComponent implements OnInit {
       this.language = language;
     });
     for (let i = 2; i <= 20; i++) {
-      this.horizontalBarChart.chartNumberItems.push(i);
+      this.chartNumberItems.push(i);
     }
-    this.horizontalBarChart
     this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
       this.total_confirmed = response['cases'];
       this.total_deceased = response['deaths'];
@@ -67,7 +76,9 @@ export class DashboardComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.setHorizontalBarChart(this.horizontalBarChart, this.data, 'country', this.horizontalBarChart.type, this.horizontalBarChart.selected);
+      this.setChart(this.horizontalBarChart, this.data, 'country', this.chartType, this.selected);
+      this.setChart(this.pieChart, this.data, 'country', this.chartType, this.selected);
+      this.setChart(this.gaugeChart, this.data, 'country', this.chartType, this.selected);
     });
   }
 
@@ -83,7 +94,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  setHorizontalBarChart(chart: object, items: [], yLabel: string, xLabel: string, number: number) {
+  setChart(chart: object, items: any[], yLabel: string, xLabel: string, number: number) {
     chart['data'] = [];
     items.sort((a, b) => { return b[xLabel] - a[xLabel] });
     items.map(item => {
@@ -107,7 +118,7 @@ export class DashboardComponent implements OnInit {
   }
 
   select(type: string) {
-    this.horizontalBarChart.type = type;
+    this.chartType = type;
     switch (type) {
       case 'cases': {
         this.isTotalSelected = true;
@@ -138,17 +149,41 @@ export class DashboardComponent implements OnInit {
         break;
       }
     }
-    this.setHorizontalBarChart(this.horizontalBarChart, this.data, 'country', this.horizontalBarChart.type, this.horizontalBarChart.selected);
+    this.setChart(this.horizontalBarChart, this.data, 'country', this.chartType, this.selected);
+    this.setChart(this.pieChart, this.data, 'country', this.chartType, this.selected);
+    this.setChart(this.gaugeChart, this.data, 'country', this.chartType, this.selected);
   }
 
   changeChart(event: any) {
     const number = event.value;
-    this.horizontalBarChart.selected = number;
-    this.setHorizontalBarChart(this.horizontalBarChart, this.data, 'country', this.horizontalBarChart.type, number);
+    this.selected = number;
+    this.setChart(this.horizontalBarChart, this.data, 'country', this.chartType, number);
+    this.setChart(this.pieChart, this.data, 'country', this.chartType, this.selected);
+    this.setChart(this.gaugeChart, this.data, 'country', this.chartType, this.selected);
   }
 
   selectChart(type: string) {
-
+    this.chart = type;
+    switch (type) {
+      case 'bar': {
+        this.isBarSelected = true;
+        this.isPieSelected = false;
+        this.isGaugeSelected = false;
+        break;
+      }
+      case 'pie': {
+        this.isBarSelected = false;
+        this.isPieSelected = true;
+        this.isGaugeSelected = false;
+        break;
+      }
+      case 'gauge': {
+        this.isBarSelected = false;
+        this.isPieSelected = false;
+        this.isGaugeSelected = true;
+        break;
+      }
+    }
   }
 
 }

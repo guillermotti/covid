@@ -277,33 +277,17 @@ app-dashboard {
           font-size: 16px;
           margin: 36px 0;
         }
-        div.chart-per-country {
-          display: none;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          margin-top: 100px;
-
-          & > div {
-            width: calc(100% / 3 - 26.6px);
-            background-color: #8181811a;
-            height: 222px;
-            margin-bottom: 40px;
-            border-radius: 16px;
-          }
-        }
         div.charts {
           width: 100%;
           display: flex;
           flex-direction: column;
+          .charts-detail {
+            height: 400px;
+          }
           & > div {
-            &:last-child {
-              height: 400px;
-            }
             margin-bottom: 40px;
             &.info-representation {
               margin-top: 20px;
-            }
-            &.type-of-chart {
             }
           }
           & > mat-form-field {
@@ -413,7 +397,6 @@ footer {
       div.countries-info-chart {
         margin-top: 160px;
         div.charts {
-          display: none;
           mat-form-field {
             margin: 36px 0;
           }
