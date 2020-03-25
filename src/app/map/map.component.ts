@@ -11,6 +11,7 @@ export class MapComponent implements OnInit {
 
   language: string = navigator.language;
   data = [];
+  mapOptions = {};
   mapData = [];
   updated: Date;
   isLoaded = false;
@@ -32,6 +33,16 @@ export class MapComponent implements OnInit {
       this.setMap('cases');
       this.isLoaded = true;
     });
+    this.mapOptions = { 
+      colorAxis: {colors: ['#CEDCFB', '#A7B3D1', '#808AA6', '#58607C', '#313751']},
+      backgroundColor: '#fff',
+      datalessRegionColor: '#eee',
+      defaultColor: '#eee',
+      animation: {
+        duration: 1000,
+        easing: 'out',
+      }
+     };
   }
 
   ngOnInit(): void {

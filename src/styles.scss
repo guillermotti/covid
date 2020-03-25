@@ -164,7 +164,8 @@ header + button {
 app-dashboard,
 app-information,
 app-countries,
-app-about {
+app-about,
+app-map {
   display: flex;
   flex-wrap: wrap;
   margin: 40px 7.3%;
@@ -237,14 +238,20 @@ app-dashboard {
         &:nth-child(2) {
           background-color: #20212d;
           color: #f5f5f5;
+          h2 {
+            font-weight: 400;
+          }
         }
         &:nth-child(3) {
-          background-color: #b7f8df;
-          color: #212121;
-        }
-        &:nth-child(4) {
           background-color: #40486a;
           color: #f5f5f5;
+          h2 {
+            font-weight: 400;
+          }
+        }
+        &:nth-child(4) {
+          background-color: #b7f8df;
+          color: #212121;
         }
         h2 {
           font-size: 46px;
@@ -258,6 +265,11 @@ app-dashboard {
           position: absolute;
           right: 26px;
           width: 40px;
+        }
+        &.section-info-deceased {
+          img {
+            width: 38px;
+          }
         }
       }
     }
@@ -398,6 +410,46 @@ app-about {
   }
 }
 
+app-map {
+  flex-direction: column;
+  div.section-title {
+    margin-top: 40px;
+    margin-bottom: 100px;
+    h1 {
+      color: #212121;
+      font-size: 34px;
+      letter-spacing: 0.24px;
+      margin-bottom: 6px;
+    }
+    span {
+      color: #818181;
+      font-size: 16px;
+    }
+  }
+  div.section-subtitle {
+    margin-bottom: 40px;
+    p {
+      margin-bottom: 6px;
+      color: #818181;
+      font-size: 16px;
+      width: 60%;
+      text-align: justify;
+    }
+  }
+  div.map-chips
+    mat-chip-list
+    .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+    background-color: #45d99b;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+  }
+  div.global-map {
+    width: 80%;
+    padding: 0 10%;
+    margin-top: 40px;
+  }
+}
+
 footer {
 }
 
@@ -432,6 +484,15 @@ footer {
           flex-direction: column-reverse;
           justify-content: space-between;
           position: relative;
+          &:nth-child(2),
+          &:nth-child(3) {
+            h2 {
+              font-weight: 200;
+            }
+            h3 {
+              font-weight: 400;
+            }
+          }
           h2 {
             font-size: 43px;
             font-weight: 300;
@@ -450,6 +511,11 @@ footer {
             bottom: 12px;
             width: 28px;
             right: unset;
+          }
+          &.section-info-deceased {
+            img {
+              width: 26px;
+            }
           }
         }
       }

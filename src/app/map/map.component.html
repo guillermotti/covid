@@ -1,33 +1,46 @@
 <div class="general-info">
-    <div class="section-title">
-        <h1>
-            {{ "MAP.INFO" | translate }}
-        </h1>
-        <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}:
-            {{ updated | date: "full":"":language }}</span>
-    </div>
-    <div class="section-subtitle">
-        <h3>
-            {{ "MAP.WHAT" | translate }}
-        </h3>
-        <span class="info-text">{{ "MAP.INFO_TEXT" | translate }}</span>
-    </div>
+  <div class="section-title">
+    <h1>
+      {{ "MAP.INFO" | translate }}
+    </h1>
+    <span class="last-update"
+      >{{ "DASHBOARD.LAST_UPDATE" | translate }}:
+      {{ updated | date: "full":"":language }}</span
+    >
+  </div>
+  <div class="section-subtitle">
+    <h3>
+      {{ "MAP.WHAT" | translate }}
+    </h3>
+    <p class="info-text">{{ "MAP.INFO_TEXT" | translate }}</p>
+  </div>
 </div>
 <div class="map-chips">
-    <p>{{ "DASHBOARD.REPRESENT" | translate }}:</p>
-    <mat-chip-list>
-        <mat-chip (click)="select('cases')" [selected]="isTotalSelected">{{ "DASHBOARD.TOTAL" | translate }}
-        </mat-chip>
-        <mat-chip (click)="select('deaths')" [selected]="isDeceasedSelected">{{ "DASHBOARD.DECEASED" | translate }}
-        </mat-chip>
-        <mat-chip (click)="select('critical')" [selected]="isCriticalSelected">{{ "DASHBOARD.CRITICAL" | translate }}
-        </mat-chip>
-        <mat-chip (click)="select('active')" [selected]="isActiveSelected">{{ "DASHBOARD.ACTIVE" | translate }}
-        </mat-chip>
-        <mat-chip (click)="select('recovered')" [selected]="isRecoveredSelected">
-            {{ "DASHBOARD.RECOVERED" | translate }}</mat-chip>
-    </mat-chip-list>
+  <p>{{ "DASHBOARD.REPRESENT" | translate }}:</p>
+  <mat-chip-list>
+    <mat-chip (click)="select('cases')" [selected]="isTotalSelected"
+      >{{ "DASHBOARD.TOTAL" | translate }}
+    </mat-chip>
+    <mat-chip (click)="select('deaths')" [selected]="isDeceasedSelected"
+      >{{ "DASHBOARD.DECEASED" | translate }}
+    </mat-chip>
+    <mat-chip (click)="select('critical')" [selected]="isCriticalSelected"
+      >{{ "DASHBOARD.CRITICAL" | translate }}
+    </mat-chip>
+    <mat-chip (click)="select('active')" [selected]="isActiveSelected"
+      >{{ "DASHBOARD.ACTIVE" | translate }}
+    </mat-chip>
+    <mat-chip (click)="select('recovered')" [selected]="isRecoveredSelected">
+      {{ "DASHBOARD.RECOVERED" | translate }}</mat-chip
+    >
+  </mat-chip-list>
 </div>
 <div class="global-map">
-    <google-chart *ngIf="isLoaded" [type]="'GeoChart'" [data]="mapData" style="width: 100%;"></google-chart>
+  <google-chart
+    *ngIf="isLoaded"
+    [type]="'GeoChart'"
+    [data]="mapData"
+    [options]="mapOptions"
+    style="width: 100%;"
+  ></google-chart>
 </div>
