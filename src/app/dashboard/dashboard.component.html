@@ -10,11 +10,13 @@
     <h1>
       {{ "DASHBOARD.GENERAL_INFO" | translate }}
     </h1>
-    <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}:
-      {{ updated | date: "full":"":language }}</span>
+    <span class="last-update"
+      >{{ "DASHBOARD.LAST_UPDATE" | translate }}:
+      {{ updated | date: "full":"":language }}</span
+    >
   </div>
   <div div class="section-info">
-    <div>
+    <div class="section-info-total">
       <h2>
         {{ allData.cases | number: "":language }}
       </h2>
@@ -23,16 +25,16 @@
         {{ "DASHBOARD.TOTAL" | translate }}
       </h3>
     </div>
-    <div>
+    <div class="section-info-critical">
       <h2>
         {{ allData.critical | number: "":language }}
       </h2>
-      <img src="../../assets/img/deceased.svg" />
+      <img src="../../assets/img/activity.svg" />
       <h3>
         {{ "DASHBOARD.CRITICAL" | translate }}
       </h3>
     </div>
-    <div>
+    <div class="section-info-deceased">
       <h2>
         {{ allData.deaths | number: "":language }}
       </h2>
@@ -41,7 +43,7 @@
         {{ "DASHBOARD.DECEASED" | translate }}
       </h3>
     </div>
-    <div>
+    <div class="section-info-recovered">
       <h2>
         {{ allData.recovered | number: "":language }}
       </h2>
@@ -74,7 +76,8 @@
             </th>
             <td mat-cell *matCellDef="let row">
               <!-- <img src="{{row.countryInfo.flag}}" /> -->
-              {{ row.country }}</td>
+              {{ row.country }}
+            </td>
           </ng-container>
 
           <!-- Confirmed Column -->
@@ -87,8 +90,8 @@
             </td>
           </ng-container>
 
-           <!-- Critical Column -->
-           <ng-container matColumnDef="critical">
+          <!-- Critical Column -->
+          <ng-container matColumnDef="critical">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
               {{ "DASHBOARD.CRITICAL" | translate }}
             </th>
@@ -146,55 +149,93 @@
       <div class="info-representation">
         <p>{{ "DASHBOARD.REPRESENT" | translate }}:</p>
         <mat-chip-list>
-          <mat-chip (click)="select('cases')" [selected]="isTotalSelected">{{ "DASHBOARD.TOTAL" | translate }}
+          <mat-chip (click)="select('cases')" [selected]="isTotalSelected"
+            >{{ "DASHBOARD.TOTAL" | translate }}
           </mat-chip>
-          <mat-chip (click)="select('deaths')" [selected]="isDeceasedSelected">{{ "DASHBOARD.DECEASED" | translate }}
+          <mat-chip (click)="select('deaths')" [selected]="isDeceasedSelected"
+            >{{ "DASHBOARD.DECEASED" | translate }}
           </mat-chip>
-          <mat-chip (click)="select('critical')" [selected]="isCriticalSelected">{{ "DASHBOARD.CRITICAL" | translate }}
+          <mat-chip (click)="select('critical')" [selected]="isCriticalSelected"
+            >{{ "DASHBOARD.CRITICAL" | translate }}
           </mat-chip>
-          <mat-chip (click)="select('active')" [selected]="isActiveSelected">{{ "DASHBOARD.ACTIVE" | translate }}
+          <mat-chip (click)="select('active')" [selected]="isActiveSelected"
+            >{{ "DASHBOARD.ACTIVE" | translate }}
           </mat-chip>
-          <mat-chip (click)="select('recovered')" [selected]="isRecoveredSelected">
-            {{ "DASHBOARD.RECOVERED" | translate }}</mat-chip>
+          <mat-chip
+            (click)="select('recovered')"
+            [selected]="isRecoveredSelected"
+          >
+            {{ "DASHBOARD.RECOVERED" | translate }}</mat-chip
+          >
         </mat-chip-list>
       </div>
       <div class="type-of-chart">
         <div>
           <p>{{ "DASHBOARD.CHART_TYPE" | translate }}:</p>
           <mat-chip-list>
-            <mat-chip (click)="selectChart('bar')" [selected]="isBarSelected">{{ "DASHBOARD.BAR" | translate }}
+            <mat-chip (click)="selectChart('bar')" [selected]="isBarSelected"
+              >{{ "DASHBOARD.BAR" | translate }}
             </mat-chip>
-            <mat-chip (click)="selectChart('pie')" [selected]="isPieSelected">{{ "DASHBOARD.PIE" | translate }}
+            <mat-chip (click)="selectChart('pie')" [selected]="isPieSelected"
+              >{{ "DASHBOARD.PIE" | translate }}
             </mat-chip>
-            <mat-chip (click)="selectChart('gauge')" [selected]="isGaugeSelected">{{ "DASHBOARD.GAUGE" | translate }}
+            <mat-chip
+              (click)="selectChart('gauge')"
+              [selected]="isGaugeSelected"
+              >{{ "DASHBOARD.GAUGE" | translate }}
             </mat-chip>
           </mat-chip-list>
         </div>
       </div>
       <mat-form-field>
         <mat-label>{{ "DASHBOARD.AMOUNT" | translate }}</mat-label>
-        <mat-select [(ngModel)]="selected" (selectionChange)="changeChart($event)">
-          <mat-option *ngFor="let number of chartNumberItems; index as i" [value]="number">
-            {{number}}
+        <mat-select
+          [(ngModel)]="selected"
+          (selectionChange)="changeChart($event)"
+        >
+          <mat-option
+            *ngFor="let number of chartNumberItems; index as i"
+            [value]="number"
+          >
+            {{ number }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <div class="charts-detail" *ngIf="chart === 'bar'">
-        <ngx-charts-bar-vertical [scheme]="colorScheme" [results]="barChart.data"
-          [showDataLabel]="barChart.showDataLabel" [xAxis]="barChart.showXAxis" [yAxis]="barChart.showYAxis"
-          [showXAxisLabel]="barChart.showXAxisLabel" xAxisLabel="{{ 'DASHBOARD.PERSON' | translate }}"
-          (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+        <ngx-charts-bar-vertical
+          [scheme]="colorScheme"
+          [results]="barChart.data"
+          [showDataLabel]="barChart.showDataLabel"
+          [xAxis]="barChart.showXAxis"
+          [yAxis]="barChart.showYAxis"
+          [showXAxisLabel]="barChart.showXAxisLabel"
+          xAxisLabel="{{ 'DASHBOARD.PERSON' | translate }}"
+          (select)="onSelect($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
+        >
         </ngx-charts-bar-vertical>
       </div>
       <div class="charts-detail" *ngIf="chart === 'pie'">
-        <ngx-charts-pie-chart [scheme]="colorScheme" [results]="pieChart.data" [labels]="pieChart.showLabels"
-          [doughnut]="pieChart.isDoughnut" (select)="onSelect($event)" (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)">
+        <ngx-charts-pie-chart
+          [scheme]="colorScheme"
+          [results]="pieChart.data"
+          [labels]="pieChart.showLabels"
+          [doughnut]="pieChart.isDoughnut"
+          (select)="onSelect($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
+        >
         </ngx-charts-pie-chart>
       </div>
       <div class="charts-detail" *ngIf="chart === 'gauge'">
-        <ngx-charts-gauge [scheme]="colorScheme" [results]="gaugeChart.data" (select)="onSelect($event)"
-          (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+        <ngx-charts-gauge
+          [scheme]="colorScheme"
+          [results]="gaugeChart.data"
+          (select)="onSelect($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
+        >
         </ngx-charts-gauge>
       </div>
     </div>
