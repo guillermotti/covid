@@ -157,12 +157,12 @@
         </mat-select>
       </mat-form-field>
       <div class="charts-detail" *ngIf="chart === 'bar'">
-        <ngx-charts-bar-horizontal [scheme]="colorScheme" [results]="horizontalBarChart.data"
-          [showDataLabel]="horizontalBarChart.showDataLabel" [xAxis]="horizontalBarChart.showXAxis"
-          [yAxis]="horizontalBarChart.showYAxis" [showXAxisLabel]="horizontalBarChart.showXAxisLabel"
+        <ngx-charts-bar-vertical [scheme]="colorScheme" [results]="barChart.data"
+          [showDataLabel]="barChart.showDataLabel" [xAxis]="barChart.showXAxis"
+          [yAxis]="barChart.showYAxis" [showXAxisLabel]="barChart.showXAxisLabel"
           xAxisLabel="{{ 'DASHBOARD.PERSON' | translate }}" (select)="onSelect($event)" (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)">
-        </ngx-charts-bar-horizontal>
+        </ngx-charts-bar-vertical>
       </div>
       <div class="charts-detail" *ngIf="chart === 'pie'">
         <ngx-charts-pie-chart [scheme]="colorScheme" [results]="pieChart.data" [labels]="pieChart.showLabels"

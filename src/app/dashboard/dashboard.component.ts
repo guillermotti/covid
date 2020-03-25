@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   //Charts
-  horizontalBarChart = {
+  barChart = {
     showXAxis: true,
     showYAxis: true,
     showXAxisLabel: true,
@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.setChart(this.horizontalBarChart, this.data, 'country', this.chartType, this.selected);
+      this.setChart(this.barChart, this.data, 'country', this.chartType, this.selected);
       this.setChart(this.pieChart, this.data, 'country', this.chartType, this.selected);
       this.setChart(this.gaugeChart, this.data, 'country', this.chartType, this.selected);
     });
@@ -160,7 +160,7 @@ export class DashboardComponent implements OnInit {
         break;
       }
     }
-    this.setChart(this.horizontalBarChart, this.data, 'country', this.chartType, this.selected);
+    this.setChart(this.barChart, this.data, 'country', this.chartType, this.selected);
     this.setChart(this.pieChart, this.data, 'country', this.chartType, this.selected);
     this.setChart(this.gaugeChart, this.data, 'country', this.chartType, this.selected);
   }
@@ -168,7 +168,7 @@ export class DashboardComponent implements OnInit {
   changeChart(event: any) {
     const number = event.value;
     this.selected = number;
-    this.setChart(this.horizontalBarChart, this.data, 'country', this.chartType, number);
+    this.setChart(this.barChart, this.data, 'country', this.chartType, number);
     this.setChart(this.pieChart, this.data, 'country', this.chartType, this.selected);
     this.setChart(this.gaugeChart, this.data, 'country', this.chartType, this.selected);
   }
