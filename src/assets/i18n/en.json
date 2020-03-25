@@ -4,7 +4,9 @@
         "COUNTRIES": "Countries",
         "ABOUT": "About",
         "DONATE": "Donate",
-        "MAP": "Global map"
+        "MAP": "Global map",
+        "MENU": "Menu",
+        "HOME": "Home"
     },
     "DASHBOARD": {
         "SEARCH": "Search",

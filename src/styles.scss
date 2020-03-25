@@ -59,6 +59,7 @@ body {
 }
 body {
   margin: 0;
+  position: relative;
   app-root {
     display: block;
   }
@@ -100,6 +101,49 @@ header {
 
   img.github {
     width: 32px;
+  }
+}
+
+div.responsiveMenu {
+  position: fixed;
+  top: 0;
+  box-sizing: border-box;
+  padding: 40px;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1000;
+  background-color: #212121;
+  color: #f5f5f5;
+  transition-property: transform, opacity;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-in-out;
+  &.shown {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  &.hidden {
+    transform: translateX(-100vw);
+    opacity: 0.96;
+  }
+  span.responsive-close-icon {
+    position: absolute;
+    top: 36px;
+    right: 40px;
+  }
+  div.menu-links {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    span {
+      margin-bottom: 16px;
+      &.menu-links-title {
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 2px;
+        font-weight: 200;
+        margin-bottom: 32px;
+      }
+    }
   }
 }
 

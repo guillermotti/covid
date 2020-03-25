@@ -1,19 +1,47 @@
 <header>
+  <div *ngIf="responsiveType === 'mobile'" class="responsive-menu-icon">
+    <img src="assets/img/menu.svg" (click)="showMenu()" />
+  </div>
   <div>
-    <img src="assets/img/covid_logo.svg" (click)="navigateTo('index')"/>
-    <div class="menu-links">
+    <img src="assets/img/covid_logo.svg" (click)="navigateTo('index')" />
+    <div *ngIf="responsiveType !== 'mobile'" class="menu-links">
       <!-- <span (click)="navigateTo('information')">{{ "HEADER.INFO" | translate }}</span> -->
       <!-- <span (click)="navigateTo('countries')">{{ "HEADER.COUNTRIES" | translate }}</span> -->
       <span (click)="navigateTo('map')">{{ "HEADER.MAP" | translate }}</span>
-      <span (click)="navigateTo('about')">{{ "HEADER.ABOUT" | translate }}</span>
+      <span (click)="navigateTo('about')">{{
+        "HEADER.ABOUT" | translate
+      }}</span>
     </div>
   </div>
   <div>
-    <img class="github" src="assets/img/github.svg" (click)="navigateTo('github')"/>
+    <img
+      class="github"
+      src="assets/img/github.svg"
+      (click)="navigateTo('github')"
+    />
   </div>
 </header>
+<div
+  *ngIf="responsiveType === 'mobile'"
+  [class]="responsiveMenu"
+  class="responsiveMenu"
+>
+  <div class="menu-links">
+    <span class="menu-links-title">{{ "HEADER.MENU" | translate }}</span>
+    <span (click)="showMenu()" (click)="navigateTo('dashboard')">{{
+      "HEADER.HOME" | translate
+    }}</span>
+    <span (click)="showMenu()" (click)="navigateTo('map')">{{
+      "HEADER.MAP" | translate
+    }}</span>
+    <span (click)="showMenu()" (click)="navigateTo('about')">{{
+      "HEADER.ABOUT" | translate
+    }}</span>
+  </div>
+  <span (click)="showMenu()" class="responsive-close-icon"
+    ><img src="assets/img/x.svg"
+  /></span>
+</div>
 <!-- <button>{{ "HEADER.DONATE" | translate }}</button> -->
 <router-outlet (activate)="onActivate()"></router-outlet>
-<footer>
-
-</footer>
+<footer></footer>
