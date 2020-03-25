@@ -13,19 +13,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DashboardComponent implements OnInit {
 
-  total_confirmed: number;
-  total_deceased: number;
-  total_recovered: number;
+  allData: any = {};
+  countriesData: any[];
   updated: Date;
   language: string = navigator.language;
   isTotalSelected: boolean = true;
   isDeceasedSelected: boolean = false;
+  isCriticalSelected: boolean = false;
   isActiveSelected: boolean = false;
   isRecoveredSelected: boolean = false;
   isBarSelected: boolean = true;
   isGaugeSelected: boolean = false;
   isPieSelected: boolean = false
-  data: any[];
   chart: string = 'bar';
   colorScheme: any = {
     domain: ['#40486a', '#4fd0f9', '#8f99af', '#95a7f6', "#6e7cb6", "#485177", "#313751", "#3b9bb9", "#276579", "#4fd0f9", "#12303a", "5b616f", "cedcfb", "8f99af", "aab0b4", "99acbc"]
@@ -34,7 +33,7 @@ export class DashboardComponent implements OnInit {
   selected: number = 5;
   chartType: string = 'cases';
 
-  displayedColumns: string[] = ['country', 'confirmed', 'deceased', 'active', 'recovered'];
+  displayedColumns: string[] = ['country', 'confirmed', 'critical', 'deceased', 'active', 'recovered'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -66,19 +65,21 @@ export class DashboardComponent implements OnInit {
       this.chartNumberItems.push(i);
     }
     this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
-      this.total_confirmed = response['cases'];
-      this.total_deceased = response['deaths'];
-      this.total_recovered = response['recovered'];
+      this.allData = response;
       this.updated = new Date(response['updated']);
     });
     this.httpClient.get('https://corona.lmao.ninja/countries').subscribe(response => {
-      this.data = response as [];
-      this.dataSource = new MatTableDataSource(this.data);
+      this.countriesData = response as [];
+      this.allData.critical = 0;
+      this.countriesData.map(item => {
+        this.allData.critical = this.allData.critical + item.critical;
+      });
+      this.dataSource = new MatTableDataSource(this.countriesData);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.setChart(this.barChart, this.data, 'country', this.chartType, this.selected);
-      this.setChart(this.pieChart, this.data, 'country', this.chartType, this.selected);
-      this.setChart(this.gaugeChart, this.data, 'country', this.chartType, this.selected);
+      this.setChart(this.barChart, 'country', this.chartType, this.selected);
+      this.setChart(this.pieChart, 'country', this.chartType, this.selected);
+      this.setChart(this.gaugeChart, 'country', this.chartType, this.selected);
     });
   }
 
@@ -94,10 +95,10 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  setChart(chart: object, items: any[], yLabel: string, xLabel: string, number: number) {
+  setChart(chart: object, yLabel: string, xLabel: string, number: number) {
     chart['data'] = [];
-    items.sort((a, b) => { return b[xLabel] - a[xLabel] });
-    items.map(item => {
+    this.countriesData.sort((a, b) => { return b[xLabel] - a[xLabel] });
+    this.countriesData.map(item => {
       if (chart['data'].length < number) {
         chart['data'].push({ name: item[yLabel], value: item[xLabel] });
       }
@@ -134,6 +135,7 @@ export class DashboardComponent implements OnInit {
       case 'cases': {
         this.isTotalSelected = true;
         this.isDeceasedSelected = false;
+        this.isCriticalSelected = false
         this.isActiveSelected = false;
         this.isRecoveredSelected = false;
         break;
@@ -141,6 +143,15 @@ export class DashboardComponent implements OnInit {
       case 'deaths': {
         this.isTotalSelected = false;
         this.isDeceasedSelected = true;
+        this.isCriticalSelected = false
+        this.isActiveSelected = false;
+        this.isRecoveredSelected = false;
+        break;
+      }
+      case 'critical': {
+        this.isTotalSelected = false;
+        this.isDeceasedSelected = false;
+        this.isCriticalSelected = true
         this.isActiveSelected = false;
         this.isRecoveredSelected = false;
         break;
@@ -148,6 +159,7 @@ export class DashboardComponent implements OnInit {
       case 'active': {
         this.isTotalSelected = false;
         this.isDeceasedSelected = false;
+        this.isCriticalSelected = false
         this.isActiveSelected = true;
         this.isRecoveredSelected = false;
         break;
@@ -155,22 +167,23 @@ export class DashboardComponent implements OnInit {
       case 'recovered': {
         this.isTotalSelected = false;
         this.isDeceasedSelected = false;
+        this.isCriticalSelected = false
         this.isActiveSelected = false;
         this.isRecoveredSelected = true;
         break;
       }
     }
-    this.setChart(this.barChart, this.data, 'country', this.chartType, this.selected);
-    this.setChart(this.pieChart, this.data, 'country', this.chartType, this.selected);
-    this.setChart(this.gaugeChart, this.data, 'country', this.chartType, this.selected);
+    this.setChart(this.barChart, 'country', this.chartType, this.selected);
+    this.setChart(this.pieChart, 'country', this.chartType, this.selected);
+    this.setChart(this.gaugeChart, 'country', this.chartType, this.selected);
   }
 
   changeChart(event: any) {
     const number = event.value;
     this.selected = number;
-    this.setChart(this.barChart, this.data, 'country', this.chartType, number);
-    this.setChart(this.pieChart, this.data, 'country', this.chartType, this.selected);
-    this.setChart(this.gaugeChart, this.data, 'country', this.chartType, this.selected);
+    this.setChart(this.barChart, 'country', this.chartType, number);
+    this.setChart(this.pieChart, 'country', this.chartType, this.selected);
+    this.setChart(this.gaugeChart, 'country', this.chartType, this.selected);
   }
 
   selectChart(type: string) {

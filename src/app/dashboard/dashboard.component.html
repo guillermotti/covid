@@ -16,7 +16,7 @@
   <div div class="section-info">
     <div>
       <h2>
-        {{ total_confirmed | number: "":language }}
+        {{ allData.cases | number: "":language }}
       </h2>
       <img src="../../assets/img/virus.svg" />
       <h3>
@@ -25,16 +25,25 @@
     </div>
     <div>
       <h2>
-        {{ total_deceased | number: "":language }}
+        {{ allData.critical | number: "":language }}
       </h2>
-      <img src="../../assets/img/deceased.svg" style="width:38px;" />
+      <img src="../../assets/img/deceased.svg" />
+      <h3>
+        {{ "DASHBOARD.CRITICAL" | translate }}
+      </h3>
+    </div>
+    <div>
+      <h2>
+        {{ allData.deaths | number: "":language }}
+      </h2>
+      <img src="../../assets/img/deceased.svg" />
       <h3>
         {{ "DASHBOARD.DECEASED" | translate }}
       </h3>
     </div>
     <div>
       <h2>
-        {{ total_recovered | number: "":language }}
+        {{ allData.recovered | number: "":language }}
       </h2>
       <img src="../../assets/img/recovered.svg" />
       <h3>
@@ -63,7 +72,9 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
               {{ "DASHBOARD.COUNTRY" | translate }}
             </th>
-            <td mat-cell *matCellDef="let row">{{ row.country }}</td>
+            <td mat-cell *matCellDef="let row">
+              <!-- <img src="{{row.countryInfo.flag}}" /> -->
+              {{ row.country }}</td>
           </ng-container>
 
           <!-- Confirmed Column -->
@@ -73,6 +84,16 @@
             </th>
             <td mat-cell *matCellDef="let row">
               {{ row.cases | number: "":language }}
+            </td>
+          </ng-container>
+
+           <!-- Critical Column -->
+           <ng-container matColumnDef="critical">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ "DASHBOARD.CRITICAL" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.critical | number: "":language }}
             </td>
           </ng-container>
 
@@ -129,6 +150,8 @@
           </mat-chip>
           <mat-chip (click)="select('deaths')" [selected]="isDeceasedSelected">{{ "DASHBOARD.DECEASED" | translate }}
           </mat-chip>
+          <mat-chip (click)="select('critical')" [selected]="isCriticalSelected">{{ "DASHBOARD.CRITICAL" | translate }}
+          </mat-chip>
           <mat-chip (click)="select('active')" [selected]="isActiveSelected">{{ "DASHBOARD.ACTIVE" | translate }}
           </mat-chip>
           <mat-chip (click)="select('recovered')" [selected]="isRecoveredSelected">
@@ -158,10 +181,9 @@
       </mat-form-field>
       <div class="charts-detail" *ngIf="chart === 'bar'">
         <ngx-charts-bar-vertical [scheme]="colorScheme" [results]="barChart.data"
-          [showDataLabel]="barChart.showDataLabel" [xAxis]="barChart.showXAxis"
-          [yAxis]="barChart.showYAxis" [showXAxisLabel]="barChart.showXAxisLabel"
-          xAxisLabel="{{ 'DASHBOARD.PERSON' | translate }}" (select)="onSelect($event)" (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)">
+          [showDataLabel]="barChart.showDataLabel" [xAxis]="barChart.showXAxis" [yAxis]="barChart.showYAxis"
+          [showXAxisLabel]="barChart.showXAxisLabel" xAxisLabel="{{ 'DASHBOARD.PERSON' | translate }}"
+          (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
         </ngx-charts-bar-vertical>
       </div>
       <div class="charts-detail" *ngIf="chart === 'pie'">

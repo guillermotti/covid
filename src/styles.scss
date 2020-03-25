@@ -222,7 +222,7 @@ app-dashboard {
       display: flex;
       justify-content: space-between;
       & > div {
-        width: calc(100% / 3 - 10.67px);
+        width: calc(100% / 4 - 10.67px);
         height: 200px;
         display: flex;
         flex-direction: column;
@@ -241,6 +241,10 @@ app-dashboard {
         &:nth-child(3) {
           background-color: #b7f8df;
           color: #212121;
+        }
+        &:nth-child(4) {
+          background-color: #40486a;
+          color: #f5f5f5;
         }
         h2 {
           font-size: 46px;

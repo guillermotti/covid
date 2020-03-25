@@ -16,6 +16,7 @@ export class MapComponent implements OnInit {
   isLoaded = false;
   isTotalSelected: boolean = true;
   isDeceasedSelected: boolean = false;
+  isCriticalSelected: boolean = false;
   isActiveSelected: boolean = false;
   isRecoveredSelected: boolean = false;
 
@@ -59,6 +60,7 @@ export class MapComponent implements OnInit {
       case 'cases': {
         this.isTotalSelected = true;
         this.isDeceasedSelected = false;
+        this.isCriticalSelected = false;
         this.isActiveSelected = false;
         this.isRecoveredSelected = false;
         break;
@@ -66,6 +68,15 @@ export class MapComponent implements OnInit {
       case 'deaths': {
         this.isTotalSelected = false;
         this.isDeceasedSelected = true;
+        this.isCriticalSelected = false;
+        this.isActiveSelected = false;
+        this.isRecoveredSelected = false;
+        break;
+      }
+      case 'critical': {
+        this.isTotalSelected = false;
+        this.isDeceasedSelected = false;
+        this.isCriticalSelected = true;
         this.isActiveSelected = false;
         this.isRecoveredSelected = false;
         break;
@@ -73,6 +84,7 @@ export class MapComponent implements OnInit {
       case 'active': {
         this.isTotalSelected = false;
         this.isDeceasedSelected = false;
+        this.isCriticalSelected = false;
         this.isActiveSelected = true;
         this.isRecoveredSelected = false;
         break;
@@ -80,6 +92,7 @@ export class MapComponent implements OnInit {
       case 'recovered': {
         this.isTotalSelected = false;
         this.isDeceasedSelected = false;
+        this.isCriticalSelected = false;
         this.isActiveSelected = false;
         this.isRecoveredSelected = true;
         break;

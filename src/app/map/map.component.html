@@ -20,6 +20,8 @@
         </mat-chip>
         <mat-chip (click)="select('deaths')" [selected]="isDeceasedSelected">{{ "DASHBOARD.DECEASED" | translate }}
         </mat-chip>
+        <mat-chip (click)="select('critical')" [selected]="isCriticalSelected">{{ "DASHBOARD.CRITICAL" | translate }}
+        </mat-chip>
         <mat-chip (click)="select('active')" [selected]="isActiveSelected">{{ "DASHBOARD.ACTIVE" | translate }}
         </mat-chip>
         <mat-chip (click)="select('recovered')" [selected]="isRecoveredSelected">
