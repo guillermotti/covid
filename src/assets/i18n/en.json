@@ -26,5 +26,9 @@
         "CHART_TYPE": "Chart type",
         "AMOUNT": "Amount of data to show",
         "CHARTDESCRIPTION": "This is a section with the progression of the virus in different countries. You can switch between values and also change the type of chart to display."
+    },
+    "ABOUT": {
+        "WHO": "Who we are",
+        "TAGLINE": "This is a tagline only for us."
     }
 }

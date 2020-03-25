@@ -26,5 +26,9 @@
         "CHART_TYPE": "Tipo de gráfico",
         "AMOUNT": "Cantidad de datos a mostrar",
         "CHARTDESCRIPTION": "En esta sección se muestra el progreso del virus en distintos países. Puedes cambiar los valores de la gráfica, así como el tipo de gráfico de representación de los datos."
+    },
+    "ABOUT": {
+        "WHO": "Quiénes somos",
+        "TAGLINE": "Este tagline es sólo para nosotros."
     }
 }
