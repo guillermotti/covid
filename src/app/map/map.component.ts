@@ -34,14 +34,11 @@ export class MapComponent implements OnInit {
       this.isLoaded = true;
     });
     this.mapOptions = { 
-      colorAxis: {colors: ['#CEDCFB', '#A7B3D1', '#808AA6', '#58607C', '#313751']},
+      // colorAxis: {colors: ['#EDEDED', '#FFCFDF', '#FF9EBF', '#FF6E9F', '#FF3D7F']},
+      colorAxis: {colors: ['#F3F3F3', '#FACDD2', '#F29BA3', '#ED6B75', '#E73845']},
       backgroundColor: '#fff',
       datalessRegionColor: '#eee',
       defaultColor: '#eee',
-      animation: {
-        duration: 1000,
-        easing: 'out',
-      }
      };
   }
 
