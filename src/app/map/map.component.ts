@@ -43,6 +43,10 @@ export class MapComponent implements OnInit {
         this.mapData.push(['United States', item[type]]);
       } else if (item['country'] === 'UK') {
         this.mapData.push(['United Kingdom', item[type]]);
+      } else if (item['country'] === 'S. Korea') {
+        this.mapData.push(['South Korea', item[type]]);
+      } else if (item['country'] === 'Congo') {
+        this.mapData.push(['CG', item[type]]);
       } else {
         this.mapData.push([item['country'], item[type]]);
       }
