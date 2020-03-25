@@ -1,1 +1,68 @@
-<p>countries works!</p>
+<mat-form-field class="autocomplete-country">
+    <input type="text" placeholder="Pick one" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectCountry($event)">
+        <mat-option *ngFor="let item of filteredOptions | async" [value]="item.country">
+            {{item.country}}
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>
+<!-- <mat-form-field class="example-full-width">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker (select)="selectDate($event)"></mat-datepicker>
+</mat-form-field> -->
+
+<div class="general-info" *ngIf="countrySelected">
+    <div class="section-title">
+        <h1>
+            {{ "DASHBOARD.GENERAL_INFO" | translate }}
+        </h1>
+        <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}:
+            {{ updated | date: "full":"":language }}</span>
+    </div>
+    <div div class="section-info">
+        <div>
+            <h2>
+                {{ countrySelected.cases | number: "":language }}
+            </h2>
+            <img src="assets/img/virus.svg" />
+            <h3>
+                {{ "DASHBOARD.TOTAL" | translate }}
+            </h3>
+        </div>
+        <div>
+            <h2>
+                {{ countrySelected.critical | number: "":language }}
+            </h2>
+            <img src="assets/img/deceased.svg" />
+            <h3>
+                {{ "DASHBOARD.CRITICAL" | translate }}
+            </h3>
+        </div>
+        <div>
+            <h2>
+                {{ countrySelected.deaths | number: "":language }}
+            </h2>
+            <img src="assets/img/deceased.svg" />
+            <h3>
+                {{ "DASHBOARD.DECEASED" | translate }}
+            </h3>
+        </div>
+        <div>
+            <h2>
+                {{ countrySelected.recovered | number: "":language }}
+            </h2>
+            <img src="assets/img/recovered.svg" />
+            <h3>
+                {{ "DASHBOARD.RECOVERED" | translate }}
+            </h3>
+        </div>
+    </div>
+</div>
+<ngx-charts-line-chart [scheme]="colorScheme" [legend]="lineChart.legend" [showXAxisLabel]="lineChart.showXAxisLabel"
+    [showYAxisLabel]="lineChart.showYAxisLabel" [xAxis]="lineChart.xAxis" [yAxis]="lineChart.yAxis"
+    [xAxisLabel]="lineChart.xAxisLabel" [yAxisLabel]="lineChart.yAxisLabel" [timeline]="lineChart.timeline"
+    [results]="lineChart.data" (select)="onSelect($event)" (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)">
+</ngx-charts-line-chart>
