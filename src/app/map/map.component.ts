@@ -11,29 +11,93 @@ export class MapComponent implements OnInit {
 
   language: string = navigator.language;
   data = [];
+  mapData = [];
+  updated: Date;
   isLoaded = false;
+  isTotalSelected: boolean = true;
+  isDeceasedSelected: boolean = false;
+  isCriticalSelected: boolean = false;
+  isActiveSelected: boolean = false;
+  isRecoveredSelected: boolean = false;
 
   constructor(private httpClient: HttpClient, private languageService: LanguageService) {
     this.languageService.selectLanguage.subscribe(language => {
       this.language = language;
     });
+    this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
+      this.updated = new Date(response['updated']);
+    });
     this.httpClient.get('https://corona.lmao.ninja/countries').subscribe(response => {
-      const data = response as [];
-      this.data = [];
-      data.map(item => {
-        if (item['country'] === 'USA') {
-          this.data.push(['United States', item['cases']]);
-        } else if (item['country'] === 'UK') {
-          this.data.push(['United Kingdom', item['cases']]);
-        } else {
-          this.data.push([item['country'], item['cases']]);
-        }
-      });
+      this.data = response as [];
+      this.setMap('cases');
       this.isLoaded = true;
     });
   }
 
   ngOnInit(): void {
+  }
+
+  setMap(type: string) {
+    this.mapData = [];
+    this.data.map(item => {
+      if (item['country'] === 'USA') {
+        this.mapData.push(['United States', item[type]]);
+      } else if (item['country'] === 'UK') {
+        this.mapData.push(['United Kingdom', item[type]]);
+      } else if (item['country'] === 'S. Korea') {
+        this.mapData.push(['South Korea', item[type]]);
+      } else if (item['country'] === 'Congo') {
+        this.mapData.push(['CG', item[type]]);
+      } else {
+        this.mapData.push([item['country'], item[type]]);
+      }
+    });
+  }
+
+  select(type: string) {
+    this.setMap(type);
+    switch (type) {
+      case 'cases': {
+        this.isTotalSelected = true;
+        this.isDeceasedSelected = false;
+        this.isCriticalSelected = false;
+        this.isActiveSelected = false;
+        this.isRecoveredSelected = false;
+        break;
+      }
+      case 'deaths': {
+        this.isTotalSelected = false;
+        this.isDeceasedSelected = true;
+        this.isCriticalSelected = false;
+        this.isActiveSelected = false;
+        this.isRecoveredSelected = false;
+        break;
+      }
+      case 'critical': {
+        this.isTotalSelected = false;
+        this.isDeceasedSelected = false;
+        this.isCriticalSelected = true;
+        this.isActiveSelected = false;
+        this.isRecoveredSelected = false;
+        break;
+      }
+      case 'active': {
+        this.isTotalSelected = false;
+        this.isDeceasedSelected = false;
+        this.isCriticalSelected = false;
+        this.isActiveSelected = true;
+        this.isRecoveredSelected = false;
+        break;
+      }
+      case 'recovered': {
+        this.isTotalSelected = false;
+        this.isDeceasedSelected = false;
+        this.isCriticalSelected = false;
+        this.isActiveSelected = false;
+        this.isRecoveredSelected = true;
+        break;
+      }
+    }
   }
 
 }
