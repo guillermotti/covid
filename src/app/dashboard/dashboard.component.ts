@@ -69,20 +69,21 @@ export class DashboardComponent implements OnInit {
     this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
       this.allData = response;
       this.updated = new Date(response['updated']);
-    });
-    this.httpClient.get('https://corona.lmao.ninja/countries').subscribe(response => {
-      this.countriesData = response as [];
-      this.allData.critical = 0;
-      this.countriesData.map(item => {
-        this.allData.critical = this.allData.critical + item.critical;
+      this.httpClient.get('https://corona.lmao.ninja/countries').subscribe(res => {
+        this.countriesData = res as [];
+        this.allData.critical = 0;
+        this.countriesData.map(item => {
+          this.allData.critical = this.allData.critical + item.critical;
+        });
+        this.dataSource = new MatTableDataSource(this.countriesData);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.setChart(this.barChart, 'country', this.chartType, this.selected);
+        this.setChart(this.pieChart, 'country', this.chartType, this.selected);
+        this.setChart(this.gaugeChart, 'country', this.chartType, this.selected);
       });
-      this.dataSource = new MatTableDataSource(this.countriesData);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.setChart(this.barChart, 'country', this.chartType, this.selected);
-      this.setChart(this.pieChart, 'country', this.chartType, this.selected);
-      this.setChart(this.gaugeChart, 'country', this.chartType, this.selected);
     });
+
   }
 
   ngOnInit(): void {
