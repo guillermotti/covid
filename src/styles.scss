@@ -6,7 +6,7 @@ $custom-typography: mat-typography-config(
   $font-family: "Inter",
   $headline: mat-typography-level(34px, 40px, 600),
   $title: mat-typography-level(45px, 55px, 500),
-  $subheading-2: mat-typography-level(26px, 31px, 300)
+  $subheading-2: mat-typography-level(26px, 31px, 300),
 );
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -62,6 +62,9 @@ body {
   position: relative;
   app-root {
     display: block;
+    .kofiimg {
+      width: 18%;
+    }
   }
 }
 
@@ -149,16 +152,19 @@ div.responsiveMenu {
 
 header + button {
   border-style: none;
-  padding: 12px 20px;
+  padding: 10px 14px;
   background-color: #ff813f;
   display: inline-flex;
   align-items: center;
   position: fixed;
   right: 40px;
   bottom: 40px;
-  font-size: 20px;
+  font-size: 12px;
   color: #fff;
   z-index: 500;
+  max-width: 140px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 app-dashboard,
@@ -436,9 +442,7 @@ app-map {
       text-align: justify;
     }
   }
-  div.map-chips
-    mat-chip-list
-    .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+  div.map-chips mat-chip-list .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
     background-color: #45d99b;
     font-weight: 400;
     letter-spacing: 0.4px;

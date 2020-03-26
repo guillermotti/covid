@@ -8,7 +8,7 @@
 <div class="general-info">
   <div class="section-title">
     <h1>
-      {{ "COUNTRY.COUNTRY_INFO" | translate }}
+      {{ "COUNTRIES.COUNTRY_INFO" | translate }}
     </h1>
     <span class="last-update"
       >{{ "DASHBOARD.LAST_UPDATE" | translate }}:
@@ -18,7 +18,7 @@
   <mat-form-field class="autocomplete-country">
     <input
       type="text"
-      placeholder="Pick one"
+      placeholder="{{ 'COUNTRIES.SELECT' | translate }}"
       matInput
       [formControl]="myControl"
       [matAutocomplete]="auto"
@@ -72,15 +72,15 @@
       </h3>
     </div>
   </div>
-  <div class="section-data">
+  <div class="section-data" *ngIf="countrySelected">
     <ngx-charts-line-chart
       [scheme]="colorScheme"
       [showXAxisLabel]="lineChart.showXAxisLabel"
       [showYAxisLabel]="lineChart.showYAxisLabel"
       [xAxis]="lineChart.xAxis"
       [yAxis]="lineChart.yAxis"
-      [xAxisLabel]="lineChart.xAxisLabel"
-      [yAxisLabel]="lineChart.yAxisLabel"
+      xAxisLabel="{{ 'COUNTRIES.DATE' | translate }}"
+      yAxisLabel="{{ 'COUNTRIES.PEOPLE' | translate }}"
       [timeline]="lineChart.timeline"
       [results]="lineChart.data"
       (select)="onSelect($event)"

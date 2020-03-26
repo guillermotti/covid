@@ -42,6 +42,8 @@ export class AppComponent {
   navigateTo(screen: string) {
     if (screen === 'github') {
       window.open('https://github.com/guillermotti/covid');
+    } else if (screen === 'kofi') {
+      window.open('https://ko-fi.com/guillermotti');
     } else {
       this.router.navigateByUrl(screen);
     }
