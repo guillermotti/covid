@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LanguageService } from '../language.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +17,7 @@ export class DashboardComponent implements OnInit {
   allData: any = {};
   countriesData: any[];
   updated: Date;
-  language: string = navigator.language;
+  language: string;
   isTotalSelected: boolean = true;
   isDeceasedSelected: boolean = false;
   isCriticalSelected: boolean = false;
@@ -57,10 +58,11 @@ export class DashboardComponent implements OnInit {
     data: []
   }
 
-  constructor(private httpClient: HttpClient, private languageService: LanguageService, private snackBar: MatSnackBar) {
+  constructor(private httpClient: HttpClient, private languageService: LanguageService, private snackBar: MatSnackBar, private translateService: TranslateService) {
     this.languageService.selectLanguage.subscribe(language => {
       this.language = language;
     });
+    this.language = this.translateService.currentLang;
     for (let i = 2; i <= 20; i++) {
       this.chartNumberItems.push(i);
     }

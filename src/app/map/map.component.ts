@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LanguageService } from '../language.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-map',
@@ -9,7 +10,7 @@ import { LanguageService } from '../language.service';
 })
 export class MapComponent implements OnInit {
 
-  language: string = navigator.language;
+  language: string;
   data = [];
   mapOptions = {};
   mapData = [];
@@ -21,10 +22,11 @@ export class MapComponent implements OnInit {
   isActiveSelected: boolean = false;
   isRecoveredSelected: boolean = false;
 
-  constructor(private httpClient: HttpClient, private languageService: LanguageService) {
+  constructor(private httpClient: HttpClient, private languageService: LanguageService, private translateService: TranslateService) {
     this.languageService.selectLanguage.subscribe(language => {
       this.language = language;
     });
+    this.language = this.translateService.currentLang;
     this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
       this.updated = new Date(response['updated']);
     });

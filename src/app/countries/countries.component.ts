@@ -4,6 +4,7 @@ import { LanguageService } from '../language.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-countries',
@@ -36,13 +37,14 @@ export class CountriesComponent implements OnInit {
   }
 
 
-  constructor(private httpClient: HttpClient, private languageService: LanguageService) {
+  constructor(private httpClient: HttpClient, private languageService: LanguageService, private translateService: TranslateService) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 20, 0, 1);
     this.maxDate = new Date();
     this.languageService.selectLanguage.subscribe(language => {
       this.language = language;
     });
+    this.language = this.translateService.currentLang;
     this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
       this.updated = new Date(response['updated']);
     });
