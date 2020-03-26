@@ -26,6 +26,7 @@
     "@swimlane/ngx-charts": "^13.0.2",
     "angular-google-charts": "^0.1.6",
     "rxjs": "~6.5.4",
+    "tabler-icons": "^1.2.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

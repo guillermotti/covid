@@ -6,7 +6,7 @@ $custom-typography: mat-typography-config(
   $font-family: "Inter",
   $headline: mat-typography-level(34px, 40px, 600),
   $title: mat-typography-level(45px, 55px, 500),
-  $subheading-2: mat-typography-level(26px, 31px, 300),
+  $subheading-2: mat-typography-level(26px, 31px, 300)
 );
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -61,9 +61,19 @@ body {
   margin: 0;
   position: relative;
   app-root {
-    display: block;
-    .kofiimg {
-      width: 18%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(100vh + 200px);
+    height: 100%;
+    button.kofibutton {
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      img.kofiimg {
+        width: 18px;
+      }
     }
   }
 }
@@ -73,7 +83,7 @@ body * {
 }
 
 header {
-  height: 52px;
+  min-height: 52px;
   display: flex;
   background-color: #212121;
   padding: 0 7.3%;
@@ -100,6 +110,13 @@ header {
       margin: 0 24px;
       cursor: pointer;
     }
+  }
+
+  div.language {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 40px;
+    color: #f5f5f5;
   }
 
   img.github {
@@ -174,6 +191,7 @@ app-about,
 app-map {
   display: flex;
   flex-wrap: wrap;
+  flex-grow: 1;
   margin: 40px 7.3%;
 }
 
@@ -442,7 +460,9 @@ app-map {
       text-align: justify;
     }
   }
-  div.map-chips mat-chip-list .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+  div.map-chips
+    mat-chip-list
+    .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
     background-color: #45d99b;
     font-weight: 400;
     letter-spacing: 0.4px;
@@ -504,6 +524,8 @@ app-countries {
 }
 
 footer {
+  height: 240px;
+  background-color: #212121;
 }
 
 @media ($mat-xs) {
@@ -662,6 +684,12 @@ footer {
           }
         }
       }
+    }
+  }
+
+  app-map {
+    div.section-subtitle p {
+      width: 100%;
     }
   }
 }
