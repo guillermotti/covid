@@ -412,9 +412,31 @@ app-about {
       & > div {
         &.about-team-guille {
           margin-right: 180px;
+          div {
+            display: flex;
+            align-items: center;
+            p {
+              margin-right: 12px;
+            }
+            a img {
+              width: 20px;
+              margin-right: 12px;
+            }
+          }
         }
         &.about-team-alex {
-          img {
+          div {
+            display: flex;
+            align-items: center;
+            p {
+              margin-right: 12px;
+            }
+            a img {
+              width: 20px;
+              margin-right: 12px;
+            }
+          }
+          & > img {
             padding-top: 10px;
           }
         }
