@@ -16,12 +16,9 @@
     </div>
   </div>
   <div>
-    <div *ngIf="responsiveType !== 'mobile'" class="language"><img src="../../node_modules/tabler-icons/icons/world.svg" /><span>ES - es</span></div>
-    <img
-      class="github"
-      src="assets/img/github.svg"
-      (click)="navigateTo('github')"
-    />
+    <div *ngIf="responsiveType !== 'mobile'" class="language" (click)="changeLanguage()"><img
+        src="assets/img/world.svg" /><span>{{ language | uppercase}}</span></div>
+    <img class="github" src="assets/img/github.svg" (click)="navigateTo('github')" />
   </div>
 </header>
 <button (click)="navigateTo('kofi')" class="kofibutton">
@@ -30,11 +27,7 @@
     "HEADER.BUY_COFFEE" | translate
   }}</span>
 </button>
-<div
-  *ngIf="responsiveType === 'mobile'"
-  [class]="responsiveMenu"
-  class="responsiveMenu"
->
+<div *ngIf="responsiveType === 'mobile'" [class]="responsiveMenu" class="responsiveMenu">
   <div class="menu-links">
     <span class="menu-links-title">{{ "HEADER.MENU" | translate }}</span>
     <span (click)="showMenu()" (click)="navigateTo('dashboard')">{{
@@ -47,9 +40,7 @@
       "HEADER.ABOUT" | translate
     }}</span>
   </div>
-  <span (click)="showMenu()" class="responsive-close-icon"
-    ><img src="assets/img/x.svg"
-  /></span>
+  <span (click)="showMenu()" class="responsive-close-icon"><img src="assets/img/x.svg" /></span>
 </div>
 <router-outlet (activate)="onActivate()"></router-outlet>
 <footer></footer>

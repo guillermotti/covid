@@ -6,7 +6,7 @@ $custom-typography: mat-typography-config(
   $font-family: "Inter",
   $headline: mat-typography-level(34px, 40px, 600),
   $title: mat-typography-level(45px, 55px, 500),
-  $subheading-2: mat-typography-level(26px, 31px, 300)
+  $subheading-2: mat-typography-level(26px, 31px, 300),
 );
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -334,6 +334,10 @@ app-dashboard {
                 font-weight: 300;
 
                 &:first-of-type {
+                  img {
+                    border-radius: 2px;
+                    max-width: 25px;
+                  }
                   color: #3987fb;
                   font-weight: 500;
                 }
@@ -483,9 +487,7 @@ app-map {
       text-align: justify;
     }
   }
-  div.map-chips
-    mat-chip-list
-    .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+  div.map-chips mat-chip-list .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
     background-color: #45d99b;
     font-weight: 400;
     letter-spacing: 0.4px;
