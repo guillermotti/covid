@@ -39,6 +39,7 @@ export class CountriesComponent implements OnInit {
   countrySelected: any = null;
   minDate: Date;
   maxDate: Date;
+  responsiveType = '';
 
   //Charts
   colorScheme: any = {
@@ -78,6 +79,22 @@ export class CountriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngDoCheck() {
+    if (window.screen.width < 599) { // 768px portrait
+      this.responsiveType = 'mobile';
+    } else if (window.screen.width >= 599 && window.screen.width < 960) {
+      this.responsiveType = 'tablet-sm';
+    } else if (window.screen.width >= 960 && window.screen.width < 1024) {
+      this.responsiveType = 'tablet';
+    } else if (window.screen.width >= 1024 && window.screen.width < 1280) {
+      this.responsiveType = 'desktop-sm';
+    } else if (window.screen.width >= 1280 && window.screen.width <= 1920) {
+      this.responsiveType = 'desktop';
+    } else {
+      this.responsiveType = 'large-screen';
+    }
   }
 
   private _filter(value: string): string[] {

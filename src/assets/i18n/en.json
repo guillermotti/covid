@@ -45,6 +45,9 @@
         "COUNTRY_INFO": "Information by country",
         "DATE": "Date",
         "PEOPLE": "Number of people",
-        "SELECT": "Select country"
+        "SELECT": "Select country",
+        "FIRST": "1. Type the country",
+        "SECOND": "2. Select the first date",
+        "THIRD": "3. Select the last date"
     }
 }

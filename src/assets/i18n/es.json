@@ -39,12 +39,15 @@
     "MAP": {
         "INFO": "Mapa informativo ",
         "WHAT": "¿Qué es el coronavirus?",
-        "INFO_TEXT": "Coronaviruses are a group of related viruses that cause diseases in mammals and birds. In humans, coronaviruses cause respiratory tract infections that can be mild, such as some cases of the common cold (among other possible causes, predominantly rhinoviruses), and others that can be lethal, such as SARS, MERS, and COVID-19. Symptoms in other species vary: in chickens, they cause an upper respiratory tract disease, while in cows and pigs they cause diarrhea. There are yet to be vaccines or antiviral drugs to prevent or treat human coronavirus infections."
+        "INFO_TEXT": "El coronavirus es una enfermedad infecciosa causada por el virus SARS-CoV-2. Se detectó por primera vez en la ciudad china de Wuhan (provincia de Hubei) en diciembre de 2019. En tres meses se propagó a prácticamente todos los países del mundo, por lo que la Organización Mundial de la Salud la declaró pandemia.​"
     },
     "COUNTRIES": {
         "COUNTRY_INFO": "Información por país",
         "DATE": "Fecha",
         "PEOPLE": "Número de personas",
-        "SELECT": "Selecciona país"
+        "SELECT": "Selecciona país",
+        "FIRST": "1. Introduce el país",
+        "SECOND": "2. Selecciona el día de incio",
+        "THIRD": "3. Selecciona el día de fin"
     }
 }

@@ -3,24 +3,66 @@
     <h1>
       {{ "COUNTRIES.COUNTRY_INFO" | translate }}
     </h1>
-    <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}:
-      {{ updated | date: "full":"":language }}</span>
+    <span class="last-update"
+      >{{ "DASHBOARD.LAST_UPDATE" | translate }}:
+      {{ updated | date: "full":"":language }}</span
+    >
   </div>
-  <mat-form-field class="autocomplete-country">
-    <input type="text" placeholder="{{ 'COUNTRIES.SELECT' | translate }}" matInput [formControl]="myControl"
-      [matAutocomplete]="auto" />
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectCountry($event)">
-      <mat-option *ngFor="let item of filteredOptions | async" [value]="item.country">
-        {{ item.country }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-  <!-- <mat-form-field class="example-full-width">
-    <mat-label>{{ 'COUNTRIES.DATE' | translate }}</mat-label>
-    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker (select)="selectDate($event)"></mat-datepicker>
-  </mat-form-field> -->
+  <div class="filter-container">
+    <div>
+      <span>{{ "COUNTRIES.FIRST" | translate }}</span>
+      <mat-form-field class="autocomplete-country" floatLabel="never">
+        <input
+          type="text"
+          placeholder="{{ 'COUNTRIES.SELECT' | translate }}"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selectCountry($event)"
+        >
+          <mat-option
+            *ngFor="let item of filteredOptions | async"
+            [value]="item.country"
+          >
+            {{ item.country }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <span>{{ "COUNTRIES.SECOND" | translate }}</span>
+      <mat-form-field class="example-full-width" floatLabel="never">
+        <mat-label>{{ "COUNTRIES.DATE" | translate }}</mat-label>
+        <input
+          matInput
+          [min]="minDate"
+          [max]="maxDate"
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker (select)="selectDate($event)"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <span>{{ "COUNTRIES.THIRD" | translate }}</span>
+      <mat-form-field class="example-full-width" floatLabel="never">
+        <mat-label>{{ "COUNTRIES.DATE" | translate }}</mat-label>
+        <input
+          matInput
+          [min]="minDate"
+          [max]="maxDate"
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker (select)="selectDate($event)"></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
 </div>
 
 <div class="detailed_information">
@@ -59,11 +101,20 @@
     </div>
   </div>
   <div class="section-data" *ngIf="countrySelected">
-    <ngx-charts-line-chart [scheme]="colorScheme" [showXAxisLabel]="lineChart.showXAxisLabel"
-      [showYAxisLabel]="lineChart.showYAxisLabel" [xAxis]="lineChart.xAxis" [yAxis]="lineChart.yAxis"
-      xAxisLabel="{{ 'COUNTRIES.DATE' | translate }}" yAxisLabel="{{ 'COUNTRIES.PEOPLE' | translate }}"
-      [timeline]="lineChart.timeline" [results]="lineChart.data" (select)="onSelect($event)"
-      (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+    <ngx-charts-line-chart
+      [scheme]="colorScheme"
+      [showXAxisLabel]="responsiveType !== 'mobile' ? 'lineChart.showXAxisLabel' : ''"
+      [showYAxisLabel]="responsiveType !== 'mobile' ? lineChart.showYAxisLabel : ''"
+      [xAxis]="lineChart.xAxis"
+      [yAxis]="responsiveType !== 'mobile' ? lineChart.yAxis : ''"
+      xAxisLabel="{{ 'COUNTRIES.DATE' | translate }}"
+      yAxisLabel="{{ 'COUNTRIES.PEOPLE' | translate }}"
+      [timeline]="lineChart.timeline"
+      [results]="lineChart.data"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+    >
     </ngx-charts-line-chart>
   </div>
 </div>
