@@ -75,8 +75,8 @@
               {{ "DASHBOARD.COUNTRY" | translate }}
             </th>
             <td mat-cell *matCellDef="let row">
-              <img src="{{row.countryInfo.flag}}" />
-              {{ row.country }}
+              <img src="{{ row.countryInfo.flag }}" />
+              <span>{{ row.country }}</span>
             </td>
           </ng-container>
 
@@ -207,9 +207,7 @@
           [results]="barChart.data"
           [showDataLabel]="barChart.showDataLabel"
           [xAxis]="barChart.showXAxis"
-          [yAxis]="barChart.showYAxis"
-          [showXAxisLabel]="barChart.showXAxisLabel"
-          xAxisLabel="{{ 'DASHBOARD.PERSON' | translate }}"
+          [yAxis]="responsiveType !== 'mobile' ? barChart.showYAxis : ''"
           (select)="onSelect($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"

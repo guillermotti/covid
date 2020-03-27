@@ -6,7 +6,7 @@ $custom-typography: mat-typography-config(
   $font-family: "Inter",
   $headline: mat-typography-level(34px, 40px, 600),
   $title: mat-typography-level(45px, 55px, 500),
-  $subheading-2: mat-typography-level(26px, 31px, 300),
+  $subheading-2: mat-typography-level(26px, 31px, 300)
 );
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -72,7 +72,10 @@ body {
       align-items: center;
       justify-content: center;
       img.kofiimg {
-        width: 18px;
+        width: 24px;
+      }
+      span {
+        margin-left: 4px;
       }
     }
   }
@@ -107,7 +110,7 @@ header {
       text-transform: uppercase;
       color: #f5f5f5;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 400;
       margin: 0 24px;
       cursor: pointer;
     }
@@ -334,12 +337,20 @@ app-dashboard {
                 font-weight: 300;
 
                 &:first-of-type {
+                  max-width: 140px;
                   img {
                     border-radius: 2px;
                     max-width: 25px;
+                    width: 24px;
+                    height: 16px;
+                    object-fit: contain;
+                    margin-right: 4px;
+                    vertical-align: middle;
                   }
-                  color: #3987fb;
-                  font-weight: 500;
+                  span {
+                    color: #3987fb;
+                    font-weight: 500;
+                  }
                 }
               }
             }
@@ -487,7 +498,9 @@ app-map {
       text-align: justify;
     }
   }
-  div.map-chips mat-chip-list .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+  div.map-chips
+    mat-chip-list
+    .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
     background-color: #45d99b;
     font-weight: 400;
     letter-spacing: 0.4px;
@@ -548,6 +561,14 @@ app-countries {
   }
 }
 
+div.cdk-overlay-container {
+  mat-option {
+    span.mat-option-text {
+      font-size: 16px;
+    }
+  }
+}
+
 footer {
   height: 240px;
   background-color: #212121;
@@ -558,10 +579,13 @@ footer {
     span {
       display: none;
     }
+    & + button {
+      right: 16px;
+    }
   }
   app-dashboard {
     div.general-info {
-      margin-top: 40px;
+      margin-top: 24px;
       margin-bottom: 64px;
       div.section-title {
         h1 {
@@ -680,8 +704,8 @@ footer {
   app-about {
     div.about-container {
       div.section-title {
-        margin-top: 40px;
-        margin-bottom: 100px;
+        margin-top: 24px;
+        margin-bottom: 64px;
         h1 {
           font-size: 24px;
         }
@@ -707,12 +731,25 @@ footer {
             margin-bottom: 4px;
             font-size: 16px;
           }
+          & > div {
+            justify-content: center;
+          }
         }
       }
     }
   }
 
   app-map {
+    div.section-title {
+      margin-top: 24px;
+      margin-bottom: 64px;
+      h1 {
+        font-size: 24px;
+      }
+      span {
+        font-size: 14px;
+      }
+    }
     div.section-subtitle p {
       width: 100%;
     }
