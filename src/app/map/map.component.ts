@@ -37,7 +37,7 @@ export class MapComponent implements OnInit {
     });
     this.mapOptions = { 
       // colorAxis: {colors: ['#EDEDED', '#FFCFDF', '#FF9EBF', '#FF6E9F', '#FF3D7F']},
-      colorAxis: {colors: ['#F3F3F3', '#FACDD2', '#F29BA3', '#ED6B75', '#E73845']},
+      colorAxis: {colors: ['#F1D6D9', '#FACDD2', '#F29BA3', '#ED6B75', '#E73845']},
       backgroundColor: '#fff',
       datalessRegionColor: '#eee',
       defaultColor: '#eee',
