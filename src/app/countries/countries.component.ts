@@ -5,11 +5,28 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
-  styleUrls: ['./countries.component.scss']
+  styleUrls: ['./countries.component.scss'],
+  providers: [
+    // The locale would typically be provided on the root module of your application. We do it at
+    // the component level here, due to limitations of our example generation script.
+    { provide: MAT_DATE_LOCALE, useValue: 'en' },
+    { provide: MAT_DATE_LOCALE, useValue: 'es' },
+
+    // // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+    // // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // // here, due to limitations of our example generation script.
+    // {
+    //   provide: DateAdapter,
+    //   useClass: MomentDateAdapter,
+    //   deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    // },
+    // { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+  ]
 })
 export class CountriesComponent implements OnInit {
 
@@ -37,12 +54,14 @@ export class CountriesComponent implements OnInit {
   }
 
 
-  constructor(private httpClient: HttpClient, private languageService: LanguageService, private translateService: TranslateService) {
+  constructor(private httpClient: HttpClient, private languageService: LanguageService, private translateService: TranslateService, private adapter: DateAdapter<any>) {
     const currentYear = new Date().getFullYear();
-    this.minDate = new Date(currentYear - 20, 0, 1);
+    this.minDate = new Date(currentYear, 0, 1);
     this.maxDate = new Date();
+    this.adapter.setLocale(this.translateService.currentLang);
     this.languageService.selectLanguage.subscribe(language => {
       this.language = language;
+      this.adapter.setLocale(this.language);
     });
     this.language = this.translateService.currentLang;
     this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
@@ -76,12 +95,12 @@ export class CountriesComponent implements OnInit {
       const seriesCases = [];
       const seriesDeaths = [];
       cases.map(item => {
-        seriesCases.push({name: item[0], value: item[1]})
+        seriesCases.push({ name: item[0], value: item[1] })
       });
       deaths.map(item => {
-        seriesDeaths.push({name: item[0], value: item[1]})
+        seriesDeaths.push({ name: item[0], value: item[1] })
       });
-      this.lineChart.data.push({ name: 'Cases', series: seriesCases }, { name: 'Deaths', series: seriesDeaths})
+      this.lineChart.data.push({ name: 'Cases', series: seriesCases }, { name: 'Deaths', series: seriesDeaths })
       Object.assign(this, this.lineChart.data);
     });
     this.httpClient.get(`https://corona.lmao.ninja/countries/${event.option.value}`).subscribe(response => {
@@ -89,11 +108,12 @@ export class CountriesComponent implements OnInit {
     });
   }
 
-  // selectDate(event: any) {
-  //   this.httpClient.get(`https://corona.lmao.ninja/countries/${event.option.value}`).subscribe(response => {
-  //     this.countrySelected = response;
-  //   });
-  // }
+  selectDate(event: any) {
+    console.log(event);
+    // this.httpClient.get(`https://corona.lmao.ninja/countries/${event.option.value}`).subscribe(response => {
+    //   this.countrySelected = response;
+    // });
+  }
 
   onSelect(data): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));

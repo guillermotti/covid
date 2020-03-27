@@ -80,8 +80,8 @@ export function BrowserLanguage() {
     MatNativeDateModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'en'},
-    { provide: LOCALE_ID, useValue: 'es'}
+    { provide: LOCALE_ID, useValue: 'en' },
+    { provide: LOCALE_ID, useValue: 'es' }
   ],
   bootstrap: [AppComponent]
 })

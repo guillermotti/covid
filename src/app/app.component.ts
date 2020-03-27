@@ -12,13 +12,14 @@ export class AppComponent {
   title = 'covid';
   responsiveType = '';
   responsiveMenu = 'hidden';
-  language = navigator.language;
+  language = navigator.language.split('-')[0];
 
-  constructor(translate: TranslateService, private router: Router, private translateService: TranslateService, private languageService: LanguageService) {
+  constructor(private router: Router, private translateService: TranslateService, private languageService: LanguageService) {
     // this language will be used as a fallback when a translation isn't found in the current language
-    // translate.setDefaultLang('es');
+    this.translateService.setDefaultLang(this.language);
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    //  translate.use('es');
+    this.translateService.use(this.language);
+    this.languageService.setLanguage(this.language);
   }
 
   onActivate() {
