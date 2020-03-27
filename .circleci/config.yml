@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:12.4.0-stretch-browsers-legacy
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
