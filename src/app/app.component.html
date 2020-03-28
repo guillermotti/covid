@@ -1,10 +1,24 @@
 <header>
-  <div *ngIf="responsiveType === 'mobile' || responsiveType === 'tablet-sm' || responsiveType === 'tablet'" class="responsive-menu-icon">
+  <div
+    *ngIf="
+      responsiveType === 'mobile' ||
+      responsiveType === 'tablet-sm' ||
+      responsiveType === 'tablet'
+    "
+    class="responsive-menu-icon"
+  >
     <img src="assets/img/menu.svg" (click)="showMenu()" />
   </div>
   <div>
     <img src="assets/img/covid_logo.svg" (click)="navigateTo('index')" />
-    <div *ngIf="responsiveType !== 'mobile' && responsiveType !== 'tablet-sm' && responsiveType !== 'tablet'" class="menu-links">
+    <div
+      *ngIf="
+        responsiveType !== 'mobile' &&
+        responsiveType !== 'tablet-sm' &&
+        responsiveType !== 'tablet'
+      "
+      class="menu-links"
+    >
       <!-- <span (click)="navigateTo('information')">{{ "HEADER.INFO" | translate }}</span> -->
       <span (click)="navigateTo('countries')">{{
         "HEADER.COUNTRIES" | translate
@@ -61,5 +75,11 @@
     ><img src="assets/img/x.svg"
   /></span>
 </div>
+<div
+  *ngIf="responsiveType === 'mobile' || responsiveType === 'tablet-sm'"
+  [class]="responsiveMenu"
+  class="overlay"
+  (click)="showMenu()"
+></div>
 <router-outlet (activate)="onActivate()"></router-outlet>
 <footer></footer>

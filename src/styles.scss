@@ -32,7 +32,7 @@ $covid-theme: mat-light-theme($covid-primary, $covid-accent, $covid-warn);
 
 /* Breakpoints */
 $mat-xs: "max-width: 599px";
-$mat-sm: "min-width: 600px and max-width: 959px";
+$mat-sm: "min-width: 600px) and (max-width: 959px";
 $mat-md: "screen and (min-width: 960px) and (max-width: 1279px)";
 $mat-lg: "screen and (min-width: 1280px) and (max-width: 1919px)";
 $mat-xl: "screen and (min-width: 1920px) and (max-width: 5000px)";
@@ -168,6 +168,25 @@ div.responsiveMenu {
         margin-bottom: 32px;
       }
     }
+  }
+}
+
+div.overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 800;
+  background-color: #212121;
+  opacity: 0.6;
+  transition-property: opacity;
+  transition-duration: 0.64s;
+  transition-timing-function: ease-in-out;
+  &.shown {
+    opacity: 0.6;
+  }
+  &.hidden {
+    transform: translateX(-100vw);
+    opacity: 0;
   }
 }
 
@@ -529,7 +548,7 @@ app-countries {
   flex-direction: column;
   div.section-title {
     margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 100px;
     h1 {
       color: #212121;
       font-size: 34px;
@@ -602,8 +621,82 @@ footer {
   background-color: #212121;
 }
 
-@media ($mat-sm) {
-  
+@media only screen and ($mat-sm) {
+  div.responsiveMenu {
+    width: 48vw;
+  }
+  app-dashboard {
+    div.general-info {
+      div.section-title {
+        margin-top: 24px;
+        margin-bottom: 64px;
+        h1 {
+          font-size: 28px;
+        }
+        span {
+          font-size: 16px;
+        }
+      }
+      div.section-info {
+        & > div {
+          padding: 19px;
+          h2 {
+            font-size: 26px;
+            line-height: initial;
+          }
+          h3 {
+            font-size: 20px;
+            line-height: initial;
+          }
+          img {
+            bottom: 20px;
+            left: 19px;
+            right: unset;
+          }
+        }
+      }
+    }
+    div.countries-info {
+      flex-wrap: wrap;
+      & > div {
+        width: calc(100% - 4%);
+        h1 {
+          font-size: 28px;
+        }
+        &.countries-info-chart {
+          margin-top: 120px;
+        }
+      }
+    }
+  }
+  app-map {
+    div.section-title {
+      margin-top: 24px;
+      margin-bottom: 64px;
+      h1 {
+        font-size: 28px;
+      }
+      span {
+        font-size: 16px;
+      }
+    }
+    div.section-subtitle p {
+      width: 100%;
+    }
+  }
+
+  app-countries {
+    div.detailed_information {
+      flex-direction: column-reverse;
+      div.section-data {
+        width: 100%;
+        height: 520px;
+      }
+      div.section-info {
+        width: 100%;
+      }
+    }
+  }
 }
 
 @media ($mat-xs) {

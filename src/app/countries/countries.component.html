@@ -112,7 +112,7 @@
       [showXAxisLabel]="responsiveType !== 'mobile' ? 'lineChart.showXAxisLabel' : ''"
       [showYAxisLabel]="responsiveType !== 'mobile' ? lineChart.showYAxisLabel : ''"
       [xAxis]="lineChart.xAxis"
-      [yAxis]="responsiveType !== 'mobile' ? lineChart.yAxis : ''"
+      [yAxis]="responsiveType !== 'mobile' && responsiveType !== 'tablet-sm' ? lineChart.yAxis : ''"
       xAxisLabel="{{ 'COUNTRIES.DATE' | translate }}"
       yAxisLabel="{{ 'COUNTRIES.PEOPLE' | translate }}"
       [timeline]="lineChart.timeline"
