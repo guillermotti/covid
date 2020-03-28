@@ -137,13 +137,14 @@ export class CountriesComponent implements OnInit {
   selectDate(type: string) {
     let data: object = {};
     data = JSON.parse(JSON.stringify(this.chartData));
+    const length = data[0].series.length;
     this.lineChart.data = [];
     if (type === 'first') {
       this.minDate2 = this.date1;
     } else if (type === 'second') {
       this.maxDate1 = this.date2;
     }
-    for (let i = 0; i < data[0].series.length; i++) {
+    for (let i = 0; i < length; i++) {
       if (new Date(data[0].series[0].name) < this.date1) {
         data[0].series.shift();
         data[1].series.shift();
