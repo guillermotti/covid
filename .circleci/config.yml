@@ -1,24 +1,20 @@
-version: 2
+version: 2.1
+orbs:
+  node: circleci/node:13.8.0
 jobs:
-  build:
-    docker:
-      - image: circleci/node:13.8.0
-    resource_class: large
+  build-and-deploy:
+    executor:
+      name: node/default 
     steps:
       - checkout
-      - run:
-          command: npm install
-      - run:
-          command: ./node_modules/.bin/ng build --prod
-      - run:
-          command: npm install --save-dev firebase-tools
-      - run:
-          command: ./node_modules/.bin/firebase use coronavirusinfo-app
-      - run:
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
-
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: ./node_modules/.bin/ng build --prod
+            - run: npm install --save-dev firebase-tools
+            - run: ./node_modules/.bin/firebase use coronavirusinfo-app
+            - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 workflows:
-  version: 2
-  workflow:
+  build-and-deploy:
     jobs:
-      - build
+      - build-and-deploy
