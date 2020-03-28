@@ -32,7 +32,7 @@ $covid-theme: mat-light-theme($covid-primary, $covid-accent, $covid-warn);
 
 /* Breakpoints */
 $mat-xs: "max-width: 599px";
-$mat-sm: "screen and (min-width: 600px) and (max-width: 959px)";
+$mat-sm: "min-width: 600px and max-width: 959px";
 $mat-md: "screen and (min-width: 960px) and (max-width: 1279px)";
 $mat-lg: "screen and (min-width: 1280px) and (max-width: 1919px)";
 $mat-xl: "screen and (min-width: 1920px) and (max-width: 5000px)";
@@ -602,6 +602,10 @@ footer {
   background-color: #212121;
 }
 
+@media ($mat-sm) {
+  
+}
+
 @media ($mat-xs) {
   header {
     span {
@@ -790,6 +794,16 @@ footer {
   }
 
   app-countries {
+    div.section-title {
+      margin-top: 24px;
+      margin-bottom: 64px;
+      h1 {
+        font-size: 24px;
+      }
+      span {
+        font-size: 14px;
+      }
+    }
     div.filter-container {
       & > div {
         display: flex;
@@ -813,7 +827,7 @@ footer {
         & > div {
           width: calc(46% - 40px);
           h3 {
-            font-size: 16px;
+            font-size: 14px;
           }
           h2 {
             font-size: 26px;

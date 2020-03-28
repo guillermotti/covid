@@ -1,10 +1,10 @@
 <header>
-  <div *ngIf="responsiveType === 'mobile'" class="responsive-menu-icon">
+  <div *ngIf="responsiveType === 'mobile' || responsiveType === 'tablet-sm' || responsiveType === 'tablet'" class="responsive-menu-icon">
     <img src="assets/img/menu.svg" (click)="showMenu()" />
   </div>
   <div>
     <img src="assets/img/covid_logo.svg" (click)="navigateTo('index')" />
-    <div *ngIf="responsiveType !== 'mobile'" class="menu-links">
+    <div *ngIf="responsiveType !== 'mobile' && responsiveType !== 'tablet-sm' && responsiveType !== 'tablet'" class="menu-links">
       <!-- <span (click)="navigateTo('information')">{{ "HEADER.INFO" | translate }}</span> -->
       <span (click)="navigateTo('countries')">{{
         "HEADER.COUNTRIES" | translate
@@ -16,9 +16,19 @@
     </div>
   </div>
   <div>
-    <div *ngIf="responsiveType !== 'mobile'" class="language" (click)="changeLanguage()"><img
-        src="assets/img/world.svg" /><span>{{ language | uppercase}}</span></div>
-    <img class="github" src="assets/img/github.svg" (click)="navigateTo('github')" />
+    <div
+      *ngIf="responsiveType !== 'mobile'"
+      class="language"
+      (click)="changeLanguage()"
+    >
+      <img src="assets/img/world.svg" /><span>{{ language | uppercase }}</span>
+    </div>
+    <img
+      class="github"
+      src="assets/img/github.svg"
+      (click)="navigateTo('github')"
+      *ngIf="responsiveType !== 'mobile' && responsiveType !== 'tablet-sm'"
+    />
   </div>
 </header>
 <button (click)="navigateTo('kofi')" class="kofibutton">
@@ -27,11 +37,18 @@
     "HEADER.BUY_COFFEE" | translate
   }}</span>
 </button>
-<div *ngIf="responsiveType === 'mobile'" [class]="responsiveMenu" class="responsiveMenu">
+<div
+  *ngIf="responsiveType === 'mobile' || responsiveType === 'tablet-sm'"
+  [class]="responsiveMenu"
+  class="responsiveMenu"
+>
   <div class="menu-links">
     <span class="menu-links-title">{{ "HEADER.MENU" | translate }}</span>
     <span (click)="showMenu()" (click)="navigateTo('dashboard')">{{
       "HEADER.HOME" | translate
+    }}</span>
+    <span (click)="showMenu()" (click)="navigateTo('countries')">{{
+      "HEADER.COUNTRIES" | translate
     }}</span>
     <span (click)="showMenu()" (click)="navigateTo('map')">{{
       "HEADER.MAP" | translate
@@ -40,7 +57,9 @@
       "HEADER.ABOUT" | translate
     }}</span>
   </div>
-  <span (click)="showMenu()" class="responsive-close-icon"><img src="assets/img/x.svg" /></span>
+  <span (click)="showMenu()" class="responsive-close-icon"
+    ><img src="assets/img/x.svg"
+  /></span>
 </div>
 <router-outlet (activate)="onActivate()"></router-outlet>
 <footer></footer>
