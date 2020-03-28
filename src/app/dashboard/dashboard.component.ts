@@ -76,6 +76,7 @@ export class DashboardComponent implements OnInit {
         this.countriesData.map(item => {
           this.allData.critical = this.allData.critical + item.critical;
         });
+        this.countriesData.sort((a, b) => { return b['cases'] - a['cases'] });
         this.dataSource = new MatTableDataSource(this.countriesData);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
