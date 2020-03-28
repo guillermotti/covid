@@ -125,6 +125,9 @@ export class CountriesComponent implements OnInit {
       });
       this.lineChart.data.push({ name: 'Cases', series: seriesCases }, { name: 'Deaths', series: seriesDeaths })
       Object.assign(this.chartData, this.lineChart.data);
+      if (this.date1 && this.date2) {
+        this.selectDate('both');
+      }
     });
     this.httpClient.get(`https://corona.lmao.ninja/countries/${country}`).subscribe(response => {
       this.countrySelected = response;
@@ -137,7 +140,7 @@ export class CountriesComponent implements OnInit {
     this.lineChart.data = [];
     if (type === 'first') {
       this.minDate2 = this.date1;
-    } else {
+    } else if (type === 'second') {
       this.maxDate1 = this.date2;
     }
     for (let i = 0; i < data[0].series.length; i++) {
