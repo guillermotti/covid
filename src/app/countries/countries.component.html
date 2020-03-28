@@ -41,10 +41,11 @@
           matInput
           [min]="minDate"
           [max]="maxDate"
-          [matDatepicker]="picker"
+          [matDatepicker]="picker1"
+          [disabled]="!countrySelected"
         />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker (select)="selectDate($event)"></mat-datepicker>
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1 (select)="selectDate($event)"></mat-datepicker>
       </mat-form-field>
     </div>
 
@@ -56,10 +57,11 @@
           matInput
           [min]="minDate"
           [max]="maxDate"
-          [matDatepicker]="picker"
+          [matDatepicker]="picker2"
+          [disabled]="!countrySelected"
         />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker (select)="selectDate($event)"></mat-datepicker>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2 (select)="selectDate($event)"></mat-datepicker>
       </mat-form-field>
     </div>
   </div>
