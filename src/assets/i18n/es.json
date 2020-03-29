@@ -47,7 +47,7 @@
         "PEOPLE": "Número de personas",
         "SELECT": "Selecciona país",
         "FIRST": "1. Introduce el país",
-        "SECOND": "2. Selecciona el día de incio",
-        "THIRD": "3. Selecciona el día de fin"
+        "SECOND": "2. Selecciona fecha inicial",
+        "THIRD": "3. Selecciona fecha final"
     }
 }

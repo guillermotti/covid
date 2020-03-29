@@ -47,7 +47,7 @@
         "PEOPLE": "Number of people",
         "SELECT": "Select country",
         "FIRST": "1. Type the country",
-        "SECOND": "2. Select the first date",
-        "THIRD": "3. Select the last date"
+        "SECOND": "2. Select initial date",
+        "THIRD": "3. Select final date"
     }
 }
