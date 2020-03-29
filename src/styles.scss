@@ -6,7 +6,7 @@ $custom-typography: mat-typography-config(
   $font-family: "Inter",
   $headline: mat-typography-level(34px, 40px, 600),
   $title: mat-typography-level(45px, 55px, 500),
-  $subheading-2: mat-typography-level(26px, 31px, 300)
+  $subheading-2: mat-typography-level(26px, 31px, 300),
 );
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -121,6 +121,20 @@ header {
     align-items: center;
     margin-right: 40px;
     color: #f5f5f5;
+    span.language-flag {
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 20px;
+      height: 15px;
+      display: flex;
+      &.flag-en {
+        background-image: url(/assets/img/ukFlag.svg);
+      }
+      &.flag-es {
+        background-image: url(/assets/img/spainFlag.svg);
+      }
+    }
   }
 
   img.github {
@@ -520,9 +534,7 @@ app-map {
       text-align: justify;
     }
   }
-  div.map-chips
-    mat-chip-list
-    .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+  div.map-chips mat-chip-list .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
     background-color: #45d99b;
     font-weight: 400;
     letter-spacing: 0.4px;

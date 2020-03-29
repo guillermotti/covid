@@ -13,6 +13,7 @@ export class AppComponent {
   responsiveType = '';
   responsiveMenu = 'hidden';
   language = navigator.language.split('-')[0];
+  languages = [{ language: 'en', flag: 'ukFlag.svg' }, { language: 'es', flag: 'spainFlag.svg' }];
 
   constructor(private router: Router, private translateService: TranslateService, private languageService: LanguageService) {
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -56,8 +57,8 @@ export class AppComponent {
     this.responsiveMenu = this.responsiveMenu === 'shown' ? 'hidden' : 'shown';
   }
 
-  changeLanguage() {
-    this.language = this.language === 'en' ? 'es' : 'en';
+  changeLanguage(event: any) {
+    this.language = event.value;
     // this language will be used as a fallback when a translation isn't found in the current language
     this.translateService.setDefaultLang(this.language);
     // the lang to use, if the lang isn't available, it will use the current loader to get them
