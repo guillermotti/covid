@@ -6,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-countries',
@@ -37,6 +38,7 @@ export class CountriesComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   historicCountrySelected: any = null;
   countrySelected: any = null;
+  country: string = '';
   date1: Date;
   minDate1: Date;
   maxDate1: Date;
@@ -60,7 +62,9 @@ export class CountriesComponent implements OnInit {
   }
 
 
-  constructor(private httpClient: HttpClient, private languageService: LanguageService, private translateService: TranslateService, private adapter: DateAdapter<any>) {
+  constructor(private httpClient: HttpClient, private languageService: LanguageService,
+    private translateService: TranslateService, private adapter: DateAdapter<any>, private route: ActivatedRoute) {
+    this.country = '';
     this.minDate1 = new Date(2020, 0, 22);
     this.maxDate1 = new Date();
     this.minDate2 = new Date(2020, 0, 22);
@@ -85,6 +89,12 @@ export class CountriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params.country) {
+        this.selectCountry(params.country);
+        this.country = params.country;
+      }
+    });
   }
 
   ngDoCheck() {

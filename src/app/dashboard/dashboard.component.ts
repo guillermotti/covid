@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LanguageService } from '../language.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -59,7 +60,8 @@ export class DashboardComponent implements OnInit {
     data: []
   }
 
-  constructor(private httpClient: HttpClient, private languageService: LanguageService, private snackBar: MatSnackBar, private translateService: TranslateService) {
+  constructor(private httpClient: HttpClient, private languageService: LanguageService,
+    private snackBar: MatSnackBar, private translateService: TranslateService, private router: Router) {
     this.languageService.selectLanguage.subscribe(language => {
       this.language = language;
     });
@@ -229,6 +231,10 @@ export class DashboardComponent implements OnInit {
         break;
       }
     }
+  }
+
+  navigateTo(country: string) {
+    this.router.navigate(['/countries'], { queryParams: { country } });
   }
 
 }
