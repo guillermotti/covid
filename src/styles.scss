@@ -6,18 +6,84 @@ $custom-typography: mat-typography-config(
   $font-family: "Inter",
   $headline: mat-typography-level(34px, 40px, 600),
   $title: mat-typography-level(45px, 55px, 500),
-  $subheading-2: mat-typography-level(26px, 31px, 300),
+  $subheading-2: mat-typography-level(26px, 31px, 300)
 );
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat-core($custom-typography);
 
+$mat-primary: (
+  50: #e4e4e4,
+  100: #bcbcbc,
+  200: #909090,
+  300: #646464,
+  400: #424242,
+  500: #212121,
+  600: #1d1d1d,
+  700: #181818,
+  800: #141414,
+  900: #0b0b0b,
+  A100: #e76c6c,
+  A200: #e04040,
+  A400: #ec0000,
+  A700: #d30000,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+
+$mat-secondary: (
+  50: #fefefe,
+  100: #fcfcfc,
+  200: #fafafa,
+  300: #f8f8f8,
+  400: #f7f7f7,
+  500: #f5f5f5,
+  600: #f4f4f4,
+  700: #f2f2f2,
+  800: #f0f0f0,
+  900: #eeeeee,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffffff,
+  A700: #ffffff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$covid-primary: mat-palette($mat-indigo);
-$covid-accent: mat-palette($mat-pink, A200, A100, A400);
+$covid-primary: mat-palette($mat-primary);
+$covid-accent: mat-palette($mat-secondary, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $covid-warn: mat-palette($mat-red);
@@ -33,7 +99,7 @@ $covid-theme: mat-light-theme($covid-primary, $covid-accent, $covid-warn);
 /* Breakpoints */
 $mat-xs: "max-width: 599px";
 $mat-sm: "min-width: 600px) and (max-width: 959px";
-$mat-md: "screen and (min-width: 960px) and (max-width: 1279px)";
+$mat-md: "min-width: 960px) and (max-width: 1279px";
 $mat-lg: "screen and (min-width: 1280px) and (max-width: 1919px)";
 $mat-xl: "screen and (min-width: 1920px) and (max-width: 5000px)";
 $mat-lt-sm: "screen and (max-width: 599px)";
@@ -121,12 +187,32 @@ header {
     align-items: center;
     margin-right: 40px;
     color: #f5f5f5;
+    mat-form-field {
+      width: 60px;
+      div.mat-form-field-wrapper {
+        padding-bottom: 12px;
+      }
+    }
+    div.mat-select-value {
+      color: #f5f5f5;
+      text-transform: uppercase;
+      font-size: 16px;
+    }
+    div.mat-select-arrow {
+      color: #212121;
+    }
+    div.mat-form-field-underline {
+      display: none;
+    }
     span.language-flag {
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
       width: 20px;
       height: 15px;
+      position: absolute;
+      left: 28px;
+      bottom: 7.5px;
       display: flex;
       &.flag-en {
         background-image: url(/assets/img/ukFlag.svg);
@@ -139,6 +225,21 @@ header {
 
   img.github {
     width: 32px;
+  }
+}
+
+div.language-selection {
+  mat-option {
+    span.mat-option-text {
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      img {
+        width: 20px;
+        height: 15px;
+        margin-left: 6px;
+      }
+    }
   }
 }
 
@@ -180,6 +281,47 @@ div.responsiveMenu {
         letter-spacing: 2px;
         font-weight: 200;
         margin-bottom: 32px;
+      }
+    }
+  }
+  div.language {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 40px;
+    margin-top: 60px;
+    color: #f5f5f5;
+    mat-form-field {
+      width: 60px;
+      div.mat-form-field-wrapper {
+        padding-bottom: 12px;
+      }
+    }
+    div.mat-select-value {
+      color: #f5f5f5;
+      text-transform: uppercase;
+      font-size: 16px;
+    }
+    div.mat-select-arrow {
+      color: #212121;
+    }
+    div.mat-form-field-underline {
+      display: none;
+    }
+    span.language-flag {
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 20px;
+      height: 15px;
+      position: absolute;
+      left: 28px;
+      bottom: 7.5px;
+      display: flex;
+      &.flag-en {
+        background-image: url(/assets/img/ukFlag.svg);
+      }
+      &.flag-es {
+        background-image: url(/assets/img/spainFlag.svg);
       }
     }
   }
@@ -534,7 +676,9 @@ app-map {
       text-align: justify;
     }
   }
-  div.map-chips mat-chip-list .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+  div.map-chips
+    mat-chip-list
+    .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
     background-color: #45d99b;
     font-weight: 400;
     letter-spacing: 0.4px;
@@ -633,6 +777,94 @@ footer {
   background-color: #212121;
 }
 
+@media only screen and ($mat-md) {
+  app-dashboard {
+    div.general-info {
+      div.section-title {
+        margin-bottom: 64px;
+        h1 {
+          font-size: 32px;
+        }
+        span {
+          font-size: 16px;
+        }
+      }
+      div.section-info {
+        & > div {
+          height: fit-content;
+          h2 {
+            font-size: 30px;
+            line-height: initial;
+          }
+          h3 {
+            font-size: 18px;
+            line-height: initial;
+            margin-bottom: 0;
+          }
+          img {
+            width: 32px;
+            right: 19px;
+            top: 34px;
+          }
+          &.section-info-deceased img {
+            width: 30px;
+          }
+        }
+      }
+    }
+    div.countries-info {
+      flex-wrap: wrap;
+      & > div {
+        width: calc(100% - 4%);
+        h1 {
+          font-size: 26px;
+          margin-bottom: 0;
+        }
+        &.countries-info-chart {
+          margin-top: 120px;
+        }
+      }
+    }
+  }
+  app-map {
+    div.section-title {
+      margin-bottom: 64px;
+      h1 {
+        font-size: 32px;
+      }
+      span {
+        font-size: 16px;
+      }
+    }
+  }
+  app-countries {
+    div.general-info {
+      div.section-title {
+        margin-bottom: 64px;
+        h1 {
+          font-size: 32px;
+        }
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  app-about {
+    div.general-info {
+      div.section-title {
+        margin-bottom: 64px;
+        h1 {
+          font-size: 32px;
+        }
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
 @media only screen and ($mat-sm) {
   div.responsiveMenu {
     width: 48vw;
@@ -707,6 +939,11 @@ footer {
       div.section-info {
         width: 100%;
       }
+    }
+  }
+  header {
+    div.language {
+      margin-right: 0;
     }
   }
 }
