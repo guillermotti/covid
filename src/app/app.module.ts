@@ -28,6 +28,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SpainComponent } from './spain/spain.component';
+import { NgxCsvParserModule } from 'ngx-csv-parser';
 
 registerLocaleData(localeEs);
 registerLocaleData(localeEn);
@@ -48,7 +50,8 @@ export function BrowserLanguage() {
     CountriesComponent,
     AboutComponent,
     DashboardComponent,
-    MapComponent
+    MapComponent,
+    SpainComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ export function BrowserLanguage() {
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxChartsModule,
+    NgxCsvParserModule,
     GoogleChartsModule.forRoot('AIzaSyC0sZArqIvT7so2JX3dGkMK2wMrZ3vIKeY'),
     TranslateModule.forRoot({
       defaultLanguage: BrowserLanguage(),

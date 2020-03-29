@@ -25,6 +25,7 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "@swimlane/ngx-charts": "^13.0.2",
     "angular-google-charts": "^0.1.6",
+    "ngx-csv-parser": "0.0.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.11.1",
     "zone.js": "~0.10.3"
