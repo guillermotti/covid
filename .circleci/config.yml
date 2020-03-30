@@ -8,6 +8,8 @@ jobs:
       - run:
           command: npm install
       - run:
+          command: curl https://covid19.isciii.es/resources/serie_historica_acumulados.csv > ./src/assets/csv/covid.csv
+      - run:
           command: ./node_modules/.bin/ng build --prod
       - run:
           command: npm install --save-dev firebase-tools

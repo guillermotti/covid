@@ -44,3 +44,76 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<div class="charts">
+    <div class="info-representation">
+      <p>{{ "DASHBOARD.REPRESENT" | translate }}:</p>
+      <mat-chip-list>
+        <mat-chip (click)="select('Casos ')" [selected]="isTotalSelected"
+          >{{ "DASHBOARD.TOTAL" | translate }}
+        </mat-chip>
+        <mat-chip (click)="select('Hospitalizados')" [selected]="isActiveSelected"
+          >{{ "DASHBOARD.DECEASED" | translate }}
+        </mat-chip>
+        <mat-chip (click)="select('UCI')" [selected]="isCriticalSelected"
+          >{{ "DASHBOARD.CRITICAL" | translate }}
+        </mat-chip>
+        <mat-chip (click)="select('Fallecidos')" [selected]="isDeceasedSelected"
+          >{{ "DASHBOARD.ACTIVE" | translate }}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <div class="type-of-chart">
+      <div>
+        <p>{{ "DASHBOARD.CHART_TYPE" | translate }}:</p>
+        <mat-chip-list>
+          <mat-chip (click)="selectChart('bar')" [selected]="isBarSelected"
+            >{{ "DASHBOARD.BAR" | translate }}
+          </mat-chip>
+          <mat-chip (click)="selectChart('pie')" [selected]="isPieSelected"
+            >{{ "DASHBOARD.PIE" | translate }}
+          </mat-chip>
+          <mat-chip
+            (click)="selectChart('gauge')"
+            [selected]="isGaugeSelected"
+            >{{ "DASHBOARD.GAUGE" | translate }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+    <div class="charts-detail" *ngIf="chart === 'bar'">
+      <ngx-charts-bar-vertical
+        [scheme]="colorScheme"
+        [results]="barChart.data"
+        [showDataLabel]="barChart.showDataLabel"
+        [xAxis]="barChart.showXAxis"
+        [yAxis]="responsiveType !== 'mobile' ? barChart.showYAxis : ''"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+      >
+      </ngx-charts-bar-vertical>
+    </div>
+    <div class="charts-detail" *ngIf="chart === 'pie'">
+      <ngx-charts-pie-chart
+        [scheme]="colorScheme"
+        [results]="pieChart.data"
+        [labels]="pieChart.showLabels"
+        [doughnut]="pieChart.isDoughnut"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+      >
+      </ngx-charts-pie-chart>
+    </div>
+    <div class="charts-detail" *ngIf="chart === 'gauge'">
+      <ngx-charts-gauge
+        [scheme]="colorScheme"
+        [results]="gaugeChart.data"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+      >
+      </ngx-charts-gauge>
+    </div>
+  </div>
