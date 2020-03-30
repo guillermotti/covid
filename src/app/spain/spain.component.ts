@@ -50,7 +50,8 @@ export class SpainComponent implements OnInit {
     domain: ['#40486a', '#4fd0f9', '#8f99af', '#95a7f6', "#6e7cb6", "#485177", "#313751", "#3b9bb9", "#276579", "#4fd0f9", "#12303a", "5b616f", "cedcfb", "8f99af", "aab0b4", "99acbc"]
   }
   chartType: string = 'Casos ';
-  spainData: any;
+  spainData: any[];
+  totalData: any;
   barChart = {
     showXAxis: true,
     showYAxis: true,
@@ -58,14 +59,20 @@ export class SpainComponent implements OnInit {
     showDataLabel: true,
     data: []
   }
-
   pieChart = {
     showLabels: true,
     isDoughnut: false,
     data: []
   }
-
   gaugeChart = {
+    data: []
+  }
+  lineChart = {
+    xAxis: true,
+    yAxis: true,
+    showYAxisLabel: true,
+    showXAxisLabel: true,
+    timeline: true,
     data: []
   }
 
@@ -76,18 +83,18 @@ export class SpainComponent implements OnInit {
       const file = new File([response], 'covid.csv');
       this.ngxCsvParser.parse(file, { header: true, delimiter: ',' })
         .pipe().subscribe((result: Array<any>) => {
-          result = result.slice(Math.max(result.length - 20, 0))
-          result.pop();
-          result.sort((a, b) => { return b['Casos '] - a['Casos '] });
-          result.map(item => {
+          this.totalData = result;
+          this.setLineChart('Hospitalizados');
+          this.spainData = result.slice(Math.max(result.length - 20, 0))
+          this.spainData.pop();
+          this.spainData.sort((a, b) => { return b[this.chartType] - a[this.chartType] });
+          this.spainData.map(item => {
             item["CCAA Codigo ISO"] = this.ccaa[item["CCAA Codigo ISO"]];
           });
-          this.spainData = result;
           this.setChart(this.barChart, 'CCAA Codigo ISO', this.chartType);
           this.setChart(this.pieChart, 'CCAA Codigo ISO', this.chartType);
           this.setChart(this.gaugeChart, 'CCAA Codigo ISO', this.chartType);
-          this.dataSource = new MatTableDataSource(result);
-          console.log('Result', result);
+          this.dataSource = new MatTableDataSource(this.spainData);
         }, (error: NgxCSVParserError) => {
           console.log('Error', error);
         });
@@ -139,6 +146,55 @@ export class SpainComponent implements OnInit {
     Object.assign(this, chart['data']);
   }
 
+  setLineChart(type: string) {
+    this.lineChart.data = [{ name: 'Andalucía', series: [] }, { name: 'Aragón', series: [] }, { name: 'Principado de Asturias', series: [] },
+    { name: 'Islas Baleares', series: [] }, { name: 'Canarias', series: [] }, { name: 'Cantabria', series: [] }, { name: 'Castilla la Mancha', series: [] },
+    { name: 'Castilla y León', series: [] }, { name: 'Cataluña', series: [] }, { name: 'Ceuta', series: [] }, { name: 'Valencia', series: [] },
+    { name: 'Extremadura', series: [] }, { name: 'Galicia', series: [] }, { name: 'Comunidad de Madrid', series: [] }, { name: 'Melilla', series: [] },
+    { name: 'Región de Murcia', series: [] }, { name: 'Comunidad Foral de Navarra', series: [] }, { name: 'País Vasco', series: [] }, { name: 'La Rioja', series: [] }];
+    this.totalData.map(item => {
+      if (item['CCAA Codigo ISO'] === 'AN') {
+        this.lineChart.data[0].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'AR') {
+        this.lineChart.data[1].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'AS') {
+        this.lineChart.data[2].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'IB') {
+        this.lineChart.data[3].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'CN') {
+        this.lineChart.data[4].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'CB') {
+        this.lineChart.data[5].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'CM') {
+        this.lineChart.data[6].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'CL') {
+        this.lineChart.data[7].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'CT') {
+        this.lineChart.data[8].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'CE') {
+        this.lineChart.data[9].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'VC') {
+        this.lineChart.data[10].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'EX') {
+        this.lineChart.data[11].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'GA') {
+        this.lineChart.data[12].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'MD') {
+        this.lineChart.data[13].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'ME') {
+        this.lineChart.data[14].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'MC') {
+        this.lineChart.data[15].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'NC') {
+        this.lineChart.data[16].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'PV') {
+        this.lineChart.data[17].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA Codigo ISO'] === 'RI') {
+        this.lineChart.data[18].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      }
+    });
+  }
+
   onActivate(data): void {
     console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
@@ -182,6 +238,7 @@ export class SpainComponent implements OnInit {
     this.setChart(this.barChart, 'CCAA Codigo ISO', this.chartType);
     this.setChart(this.pieChart, 'CCAA Codigo ISO', this.chartType);
     this.setChart(this.gaugeChart, 'CCAA Codigo ISO', this.chartType);
+    this.setLineChart(this.chartType);
   }
 
   selectChart(type: string) {

@@ -50,16 +50,16 @@
       <p>{{ "DASHBOARD.REPRESENT" | translate }}:</p>
       <mat-chip-list>
         <mat-chip (click)="select('Casos ')" [selected]="isTotalSelected"
-          >{{ "DASHBOARD.TOTAL" | translate }}
+          >{{ "SPAIN.CASES" | translate }}
         </mat-chip>
         <mat-chip (click)="select('Hospitalizados')" [selected]="isActiveSelected"
-          >{{ "DASHBOARD.DECEASED" | translate }}
+          >{{ "SPAIN.HOSPITAL" | translate }}
         </mat-chip>
         <mat-chip (click)="select('UCI')" [selected]="isCriticalSelected"
-          >{{ "DASHBOARD.CRITICAL" | translate }}
+          >{{ "SPAIN.CRITICAL" | translate }}
         </mat-chip>
         <mat-chip (click)="select('Fallecidos')" [selected]="isDeceasedSelected"
-          >{{ "DASHBOARD.ACTIVE" | translate }}
+          >{{ "SPAIN.DECEASED" | translate }}
         </mat-chip>
       </mat-chip-list>
     </div>
@@ -117,3 +117,20 @@
       </ngx-charts-gauge>
     </div>
   </div>
+
+  <div class="section-data">
+    <ngx-charts-line-chart
+      [scheme]="colorScheme"
+      [showXAxisLabel]="responsiveType !== 'mobile' ? 'lineChart.showXAxisLabel' : ''"
+      [showYAxisLabel]="responsiveType !== 'mobile' ? lineChart.showYAxisLabel : ''"
+      [xAxis]="lineChart.xAxis"
+      [yAxis]="responsiveType !== 'mobile' && responsiveType !== 'tablet-sm' ? lineChart.yAxis : ''"
+      xAxisLabel="{{ 'COUNTRIES.DATE' | translate }}"
+      yAxisLabel="{{ 'COUNTRIES.PEOPLE' | translate }}"
+      [timeline]="lineChart.timeline"
+      [results]="lineChart.data"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+    >
+    </ngx-charts-line-chart>
