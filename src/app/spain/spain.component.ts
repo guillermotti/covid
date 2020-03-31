@@ -76,6 +76,18 @@ export class SpainComponent implements OnInit {
     data: []
   }
 
+  //map
+  mapData = [];
+  isLoaded = false;
+  mapOptions = { 
+    // colorAxis: {colors: ['#EDEDED', '#FFCFDF', '#FF9EBF', '#FF6E9F', '#FF3D7F']},
+    colorAxis: {colors: ['#F1D6D9', '#FACDD2', '#F29BA3', '#ED6B75', '#E73845']},
+    backgroundColor: '#fff',
+    datalessRegionColor: '#eee',
+    defaultColor: '#eee',
+    region: 'ES'
+   };
+
   constructor(private httpClient: HttpClient, private ngxCsvParser: NgxCsvParser, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -91,6 +103,7 @@ export class SpainComponent implements OnInit {
           this.spainData.map(item => {
             item["CCAA Codigo ISO"] = this.ccaa[item["CCAA Codigo ISO"]];
           });
+          this.isLoaded = true;
           this.setChart(this.barChart, 'CCAA Codigo ISO', this.chartType);
           this.setChart(this.pieChart, 'CCAA Codigo ISO', this.chartType);
           this.setChart(this.gaugeChart, 'CCAA Codigo ISO', this.chartType);
