@@ -1,29 +1,24 @@
 <header>
-  <div
-    *ngIf="
+  <div *ngIf="
       responsiveType === 'mobile' ||
       responsiveType === 'tablet-sm' ||
       responsiveType === 'tablet'
-    "
-    class="responsive-menu-icon"
-  >
+    " class="responsive-menu-icon">
     <img src="assets/img/menu.svg" (click)="showMenu()" />
   </div>
   <div>
     <img src="assets/img/covid_logo.svg" (click)="navigateTo('index')" />
-    <div
-      *ngIf="
+    <div *ngIf="
         responsiveType !== 'mobile' &&
         responsiveType !== 'tablet-sm' &&
         responsiveType !== 'tablet'
-      "
-      class="menu-links"
-    >
+      " class="menu-links">
       <!-- <span (click)="navigateTo('information')">{{ "HEADER.INFO" | translate }}</span> -->
       <span (click)="navigateTo('countries')">{{
         "HEADER.COUNTRIES" | translate
       }}</span>
       <span (click)="navigateTo('map')">{{ "HEADER.MAP" | translate }}</span>
+      <span (click)="navigateTo('spain')">{{ "HEADER.SPAIN" | translate }}</span>
       <span (click)="navigateTo('about')">{{
         "HEADER.ABOUT" | translate
       }}</span>
@@ -33,15 +28,8 @@
     <div *ngIf="responsiveType !== 'mobile'" class="language">
       <!-- <img src="assets/img/world.svg" /><span>{{ language | uppercase }}</span> -->
       <mat-form-field>
-        <mat-select
-          [(ngModel)]="language"
-          (selectionChange)="changeLanguage($event)"
-          panelClass="language-selection"
-        >
-          <mat-option
-            *ngFor="let item of languages; index as i"
-            [value]="item.language"
-          >
+        <mat-select [(ngModel)]="language" (selectionChange)="changeLanguage($event)" panelClass="language-selection">
+          <mat-option *ngFor="let item of languages; index as i" [value]="item.language">
             <span>{{ item.language }}</span>
             <img src="assets/img/{{ item.flag }}" />
           </mat-option>
@@ -49,12 +37,8 @@
         <span class="language-flag flag-{{ language }}"></span>
       </mat-form-field>
     </div>
-    <img
-      class="github"
-      src="assets/img/github.svg"
-      (click)="navigateTo('github')"
-      *ngIf="responsiveType !== 'mobile' && responsiveType !== 'tablet-sm'"
-    />
+    <img class="github" src="assets/img/github.svg" (click)="navigateTo('github')"
+      *ngIf="responsiveType !== 'mobile' && responsiveType !== 'tablet-sm'" />
   </div>
 </header>
 <button (click)="navigateTo('kofi')" class="kofibutton">
@@ -63,11 +47,8 @@
     "HEADER.BUY_COFFEE" | translate
   }}</span>
 </button>
-<div
-  *ngIf="responsiveType === 'mobile' || responsiveType === 'tablet-sm'"
-  [class]="responsiveMenu"
-  class="responsiveMenu"
->
+<div *ngIf="responsiveType === 'mobile' || responsiveType === 'tablet-sm'" [class]="responsiveMenu"
+  class="responsiveMenu">
   <div class="menu-links">
     <span class="menu-links-title">{{ "HEADER.MENU" | translate }}</span>
     <span (click)="showMenu()" (click)="navigateTo('dashboard')">{{
@@ -79,21 +60,17 @@
     <span (click)="showMenu()" (click)="navigateTo('map')">{{
       "HEADER.MAP" | translate
     }}</span>
+    <span (click)="showMenu()" (click)="navigateTo('spain')">{{ 
+      "HEADER.SPAIN" | translate 
+    }}</span>
     <span (click)="showMenu()" (click)="navigateTo('about')">{{
       "HEADER.ABOUT" | translate
     }}</span>
   </div>
   <div *ngIf="responsiveType === 'mobile'" class="language">
     <mat-form-field>
-      <mat-select
-        [(ngModel)]="language"
-        (selectionChange)="changeLanguage($event)"
-        panelClass="language-selection"
-      >
-        <mat-option
-          *ngFor="let item of languages; index as i"
-          [value]="item.language"
-        >
+      <mat-select [(ngModel)]="language" (selectionChange)="changeLanguage($event)" panelClass="language-selection">
+        <mat-option *ngFor="let item of languages; index as i" [value]="item.language">
           <span>{{ item.language }}</span>
           <img src="assets/img/{{ item.flag }}" />
         </mat-option>
@@ -101,15 +78,10 @@
       <span class="language-flag flag-{{ language }}"></span>
     </mat-form-field>
   </div>
-  <span (click)="showMenu()" class="responsive-close-icon"
-    ><img src="assets/img/x.svg"
-  /></span>
+  <img class="github" src="assets/img/github.svg" (click)="navigateTo('github')"/>
+  <span (click)="showMenu()" class="responsive-close-icon"><img src="assets/img/x.svg" /></span>
 </div>
-<div
-  *ngIf="responsiveType === 'mobile' || responsiveType === 'tablet-sm'"
-  [class]="responsiveMenu"
-  class="overlay"
-  (click)="showMenu()"
-></div>
+<div *ngIf="responsiveType === 'mobile' || responsiveType === 'tablet-sm'" [class]="responsiveMenu" class="overlay"
+  (click)="showMenu()"></div>
 <router-outlet (activate)="onActivate()"></router-outlet>
 <footer></footer>

@@ -2,16 +2,14 @@
   <h1>
     {{ "SPAIN.GENERAL_INFO" | translate }}
   </h1>
-  <!-- <span class="last-update"
-    >{{ "SPAIN.LAST_UPDATE" | translate }}:
-    {{ updated | date: "full":"":language }}</span
-  > -->
+  <span class="last-update">{{ "DASHBOARD.LAST_UPDATE" | translate }}:
+    {{ updated }}</span>
 </div>
 
 <div class="table">
   <mat-form-field>
     <mat-label>{{ "SPAIN.SEARCH" | translate }}</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" />
+    <input matInput (keyup)="applyFilter($event)"/>
   </mat-form-field>
 
   <div class="mat-elevation-z8">
@@ -22,7 +20,7 @@
           {{ "SPAIN.COMUNIDAD" | translate }}
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element["CCAA Codigo ISO"] }}
+          {{ element.comunidad }}
         </td>
       </ng-container>
 
@@ -67,58 +65,37 @@
 </div>
 
 <div class="visual-data">
-  <div class="global-map">
-    <google-chart
-      *ngIf="isLoaded"
-      [type]="'GeoChart'"
-      [data]="mapData"
-      [options]="mapOptions"
-      style="width: 100%;"
-    >
-    </google-chart>
-  </div>
-
   <div class="info-representation">
     <p>{{ "DASHBOARD.REPRESENT" | translate }}:</p>
     <mat-chip-list>
-      <mat-chip (click)="select('Casos ')" [selected]="isTotalSelected"
-        >{{ "SPAIN.CASES" | translate }}
+      <mat-chip (click)="select('Casos ')" [selected]="isTotalSelected">{{ "SPAIN.CASES" | translate }}
       </mat-chip>
-      <mat-chip (click)="select('Hospitalizados')" [selected]="isActiveSelected"
-        >{{ "SPAIN.HOSPITAL" | translate }}
+      <mat-chip (click)="select('Hospitalizados')" [selected]="isActiveSelected">{{ "SPAIN.HOSPITAL" | translate }}
       </mat-chip>
-      <mat-chip (click)="select('UCI')" [selected]="isCriticalSelected"
-        >{{ "SPAIN.CRITICAL" | translate }}
+      <mat-chip (click)="select('UCI')" [selected]="isCriticalSelected">{{ "SPAIN.CRITICAL" | translate }}
       </mat-chip>
-      <mat-chip (click)="select('Fallecidos')" [selected]="isDeceasedSelected"
-        >{{ "SPAIN.DECEASED" | translate }}
+      <mat-chip (click)="select('Fallecidos')" [selected]="isDeceasedSelected">{{ "SPAIN.DECEASED" | translate }}
       </mat-chip>
     </mat-chip-list>
   </div>
+  
+  <div class="global-map">
+    <google-chart *ngIf="isLoaded" [type]="'GeoChart'" [data]="mapData" [options]="mapOptions" style="width: 100%;">
+    </google-chart>
+  </div>
 
   <div class="section-data">
-    <ngx-charts-line-chart
-      [scheme]="colorScheme"
-      [showXAxisLabel]="
+    <ngx-charts-line-chart [scheme]="colorScheme" [showXAxisLabel]="
         responsiveType !== 'mobile' ? 'lineChart.showXAxisLabel' : ''
-      "
-      [showYAxisLabel]="
+      " [showYAxisLabel]="
         responsiveType !== 'mobile' ? lineChart.showYAxisLabel : ''
-      "
-      [xAxis]="lineChart.xAxis"
-      [yAxis]="
+      " [xAxis]="lineChart.xAxis" [yAxis]="
         responsiveType !== 'mobile' && responsiveType !== 'tablet-sm'
           ? lineChart.yAxis
           : ''
-      "
-      xAxisLabel="{{ 'COUNTRIES.DATE' | translate }}"
-      yAxisLabel="{{ 'COUNTRIES.PEOPLE' | translate }}"
-      [timeline]="lineChart.timeline"
-      [results]="lineChart.data"
-      (select)="onSelect($event)"
-      (activate)="onActivate($event)"
-      (deactivate)="onDeactivate($event)"
-    >
+      " xAxisLabel="{{ 'COUNTRIES.DATE' | translate }}" yAxisLabel="{{ 'COUNTRIES.PEOPLE' | translate }}"
+      [timeline]="lineChart.timeline" [results]="lineChart.data" (select)="onSelect($event)"
+      (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
     </ngx-charts-line-chart>
   </div>
 
@@ -127,51 +104,30 @@
       <div>
         <p>{{ "DASHBOARD.CHART_TYPE" | translate }}:</p>
         <mat-chip-list>
-          <mat-chip (click)="selectChart('bar')" [selected]="isBarSelected"
-            >{{ "DASHBOARD.BAR" | translate }}
+          <mat-chip (click)="selectChart('bar')" [selected]="isBarSelected">{{ "DASHBOARD.BAR" | translate }}
           </mat-chip>
-          <mat-chip (click)="selectChart('pie')" [selected]="isPieSelected"
-            >{{ "DASHBOARD.PIE" | translate }}
+          <mat-chip (click)="selectChart('pie')" [selected]="isPieSelected">{{ "DASHBOARD.PIE" | translate }}
           </mat-chip>
-          <mat-chip (click)="selectChart('gauge')" [selected]="isGaugeSelected"
-            >{{ "DASHBOARD.GAUGE" | translate }}
+          <mat-chip (click)="selectChart('gauge')" [selected]="isGaugeSelected">{{ "DASHBOARD.GAUGE" | translate }}
           </mat-chip>
         </mat-chip-list>
       </div>
     </div>
     <div class="charts-detail" *ngIf="chart === 'bar'">
-      <ngx-charts-bar-vertical
-        [scheme]="colorScheme"
-        [results]="barChart.data"
-        [showDataLabel]="barChart.showDataLabel"
-        [xAxis]="barChart.showXAxis"
-        [yAxis]="responsiveType !== 'mobile' ? barChart.showYAxis : ''"
-        (select)="onSelect($event)"
-        (activate)="onActivate($event)"
-        (deactivate)="onDeactivate($event)"
-      >
+      <ngx-charts-bar-vertical [scheme]="colorScheme" [results]="barChart.data" [showDataLabel]="barChart.showDataLabel"
+        [xAxis]="barChart.showXAxis" [yAxis]="responsiveType !== 'mobile' ? barChart.showYAxis : ''"
+        (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
       </ngx-charts-bar-vertical>
     </div>
     <div class="charts-detail" *ngIf="chart === 'pie'">
-      <ngx-charts-pie-chart
-        [scheme]="colorScheme"
-        [results]="pieChart.data"
-        [labels]="pieChart.showLabels"
-        [doughnut]="pieChart.isDoughnut"
-        (select)="onSelect($event)"
-        (activate)="onActivate($event)"
-        (deactivate)="onDeactivate($event)"
-      >
+      <ngx-charts-pie-chart [scheme]="colorScheme" [results]="pieChart.data" [labels]="pieChart.showLabels"
+        [doughnut]="pieChart.isDoughnut" (select)="onSelect($event)" (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)">
       </ngx-charts-pie-chart>
     </div>
     <div class="charts-detail" *ngIf="chart === 'gauge'">
-      <ngx-charts-gauge
-        [scheme]="colorScheme"
-        [results]="gaugeChart.data"
-        (select)="onSelect($event)"
-        (activate)="onActivate($event)"
-        (deactivate)="onDeactivate($event)"
-      >
+      <ngx-charts-gauge [scheme]="colorScheme" [results]="gaugeChart.data" (select)="onSelect($event)"
+        (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
       </ngx-charts-gauge>
     </div>
   </div>

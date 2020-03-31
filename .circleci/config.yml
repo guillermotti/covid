@@ -19,6 +19,12 @@ jobs:
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
+  nightly:
+    triggers: #use the triggers key to indicate a scheduled build
+      - schedule:
+          cron: "0 0,4,8 * * *" # use cron syntax to set the schedule
+    jobs:
+      - build
   workflow:
     jobs:
       - build

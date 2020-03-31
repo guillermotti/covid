@@ -47,11 +47,12 @@ export class SpainComponent implements OnInit {
   isPieSelected: boolean = false
   chart: string = 'bar';
   colorScheme: any = {
-    domain: ['#40486a', '#4fd0f9', '#8f99af', '#95a7f6', "#6e7cb6", "#485177", "#313751", "#3b9bb9", "#276579", "#4fd0f9", "#12303a", "5b616f", "cedcfb", "8f99af", "aab0b4", "99acbc"]
+    domain: ['#40486a', '#4fd0f9', '#8f99af', '#95a7f6', "#6e7cb6", "#485177", "#313751", "#3b9bb9", "#276579", "#4fd0f9", "#12303a", "#5b616f", "#cedcfb", "#8f99af", "#aab0b4", "#99acbc"]
   }
   chartType: string = 'Casos ';
   spainData: any[];
   totalData: any;
+  updated: string;
   barChart = {
     showXAxis: true,
     showYAxis: true,
@@ -79,16 +80,17 @@ export class SpainComponent implements OnInit {
   //map
   mapData = [];
   isLoaded = false;
-  mapOptions = { 
+  mapColumnNames = ['Comunidad', 'Casos'];
+  mapOptions = {
     // colorAxis: {colors: ['#EDEDED', '#FFCFDF', '#FF9EBF', '#FF6E9F', '#FF3D7F']},
-    colorAxis: {colors: ['#F1D6D9', '#FACDD2', '#F29BA3', '#ED6B75', '#E73845']},
+    colorAxis: { colors: ['#F1D6D9', '#FACDD2', '#F29BA3', '#ED6B75', '#E73845'] },
     backgroundColor: '#fff',
     datalessRegionColor: '#eee',
     defaultColor: '#eee',
     region: 'ES',
     displayMode: 'regions',
     resolution: 'provinces'
-   };
+  };
 
   constructor(private httpClient: HttpClient, private ngxCsvParser: NgxCsvParser, private snackBar: MatSnackBar) { }
 
@@ -98,21 +100,15 @@ export class SpainComponent implements OnInit {
       this.ngxCsvParser.parse(file, { header: true, delimiter: ',' })
         .pipe().subscribe((result: Array<any>) => {
           this.totalData = result;
-          this.setLineChart('Hospitalizados');
+          this.updated = result[result.length - 2]["Fecha"];
           this.spainData = result.slice(Math.max(result.length - 20, 0))
           this.spainData.pop();
           this.spainData.sort((a, b) => { return b[this.chartType] - a[this.chartType] });
-          this.spainData.map(item => {
-            this.mapData.push([item["CCAA Codigo ISO"], Number(item["Casos "])])
-            item["CCAA Codigo ISO"] = this.ccaa[item["CCAA Codigo ISO"]];
-          });
-          this.mapData.map(item => {
-            item[0] = `ES-${item[0]}`;
-          });
-          this.isLoaded = true;
-          this.setChart(this.barChart, 'CCAA Codigo ISO', this.chartType);
-          this.setChart(this.pieChart, 'CCAA Codigo ISO', this.chartType);
-          this.setChart(this.gaugeChart, 'CCAA Codigo ISO', this.chartType);
+          this.setLineChart(this.chartType);
+          this.setMapChart(this.chartType);
+          this.setChart(this.barChart, 'comunidad', this.chartType);
+          this.setChart(this.pieChart, 'comunidad', this.chartType);
+          this.setChart(this.gaugeChart, 'comunidad', this.chartType);
           this.dataSource = new MatTableDataSource(this.spainData);
         }, (error: NgxCSVParserError) => {
           console.log('Error', error);
@@ -214,6 +210,18 @@ export class SpainComponent implements OnInit {
     });
   }
 
+  setMapChart(type: string) {
+    this.mapData = [];
+    this.spainData.map(item => {
+      this.mapData.push([item["CCAA Codigo ISO"], Number(item[type])])
+      item["comunidad"] = this.ccaa[item["CCAA Codigo ISO"]];
+    });
+    this.mapData.map(item => {
+      item[0] = `ES-${item[0]}`;
+    });
+    this.isLoaded = true;
+  }
+
   onActivate(data): void {
     console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
@@ -254,10 +262,11 @@ export class SpainComponent implements OnInit {
         break;
       }
     }
-    this.setChart(this.barChart, 'CCAA Codigo ISO', this.chartType);
-    this.setChart(this.pieChart, 'CCAA Codigo ISO', this.chartType);
-    this.setChart(this.gaugeChart, 'CCAA Codigo ISO', this.chartType);
+    this.setChart(this.barChart, 'comunidad', this.chartType);
+    this.setChart(this.pieChart, 'comunidad', this.chartType);
+    this.setChart(this.gaugeChart, 'comunidad', this.chartType);
     this.setLineChart(this.chartType);
+    this.setMapChart(this.chartType);
   }
 
   selectChart(type: string) {
