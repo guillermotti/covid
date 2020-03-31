@@ -85,7 +85,9 @@ export class SpainComponent implements OnInit {
     backgroundColor: '#fff',
     datalessRegionColor: '#eee',
     defaultColor: '#eee',
-    region: 'ES'
+    region: 'ES',
+    displayMode: 'regions',
+    resolution: 'provinces'
    };
 
   constructor(private httpClient: HttpClient, private ngxCsvParser: NgxCsvParser, private snackBar: MatSnackBar) { }
@@ -101,7 +103,11 @@ export class SpainComponent implements OnInit {
           this.spainData.pop();
           this.spainData.sort((a, b) => { return b[this.chartType] - a[this.chartType] });
           this.spainData.map(item => {
+            this.mapData.push([item["CCAA Codigo ISO"], Number(item["Casos "])])
             item["CCAA Codigo ISO"] = this.ccaa[item["CCAA Codigo ISO"]];
+          });
+          this.mapData.map(item => {
+            item[0] = `ES-${item[0]}`;
           });
           this.isLoaded = true;
           this.setChart(this.barChart, 'CCAA Codigo ISO', this.chartType);
