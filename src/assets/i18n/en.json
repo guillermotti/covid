@@ -49,5 +49,15 @@
         "FIRST": "1. Type the country",
         "SECOND": "2. Select initial date",
         "THIRD": "3. Select final date"
+    },
+    "SPAIN": {
+        "DATE": "Date",
+        "COMUNIDAD": "State",
+        "CASES": "Cases",
+        "HOSPITAL": "Active",
+        "CRITICAL": "Critical",
+        "DECEASED": "Deceased",
+        "GENERAL_INFO": "Situation in Spain",
+        "SEARCH": "Search by region"
     }
 }

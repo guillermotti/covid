@@ -49,5 +49,15 @@
         "FIRST": "1. Introduce el país",
         "SECOND": "2. Selecciona fecha inicial",
         "THIRD": "3. Selecciona fecha final"
+    },
+    "SPAIN": {
+        "DATE": "Fecha",
+        "COMUNIDAD": "CCAA",
+        "CASES": "Casos",
+        "HOSPITAL": "Activos",
+        "CRITICAL": "Criticos",
+        "DECEASED": "Fallecidos",
+        "GENERAL_INFO": "Situación en España",
+        "SEARCH": "Búsqueda por comunidad autónoma"
     }
 }

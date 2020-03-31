@@ -33,7 +33,7 @@ export class SpainComponent implements OnInit {
     "RI": "La Rioja"
   }
   today: Date = new Date();
-  displayedColumns: string[] = ['date', 'comunidad', 'cases', 'hospital', 'critical', 'deceased'];
+  displayedColumns: string[] = ['comunidad', 'cases', 'hospital', 'critical', 'deceased'];
   dataSource: MatTableDataSource<any>;
   responsiveType = '';
 
