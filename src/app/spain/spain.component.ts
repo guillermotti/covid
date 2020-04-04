@@ -100,8 +100,9 @@ export class SpainComponent implements OnInit {
       this.ngxCsvParser.parse(file, { header: true, delimiter: ',' })
         .pipe().subscribe((result: Array<any>) => {
           this.totalData = result;
-          this.updated = result[result.length - 2]["Fecha"];
+          this.updated = result[result.length - 3]["Fecha"];
           this.spainData = result.slice(Math.max(result.length - 20, 0))
+          this.spainData.pop();
           this.spainData.pop();
           this.spainData.sort((a, b) => { return b[this.chartType] - a[this.chartType] });
           this.setLineChart(this.chartType);

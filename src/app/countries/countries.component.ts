@@ -80,6 +80,7 @@ export class CountriesComponent implements OnInit {
     });
     this.httpClient.get('https://corona.lmao.ninja/countries').subscribe(response => {
       this.data = response as [];
+      this.data.shift();
       this.filteredOptions = this.myControl.valueChanges
         .pipe(
           startWith(''),

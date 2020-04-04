@@ -74,6 +74,7 @@ export class DashboardComponent implements OnInit {
       this.updated = new Date(response['updated']);
       this.httpClient.get('https://corona.lmao.ninja/countries').subscribe(res => {
         this.countriesData = res as [];
+        this.countriesData.shift();
         this.allData.critical = 0;
         this.countriesData.map(item => {
           this.allData.critical = this.allData.critical + item.critical;
