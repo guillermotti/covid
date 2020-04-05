@@ -101,7 +101,7 @@ export class SpainComponent implements OnInit {
         .pipe().subscribe((result: Array<any>) => {
           this.totalData = result;
           this.updated = result[result.length - 3]["Fecha"];
-          this.spainData = result.slice(Math.max(result.length - 20, 0))
+          this.spainData = result.slice(Math.max(result.length - 21, 0))
           this.spainData.pop();
           this.spainData.pop();
           this.spainData.sort((a, b) => { return b[this.chartType] - a[this.chartType] });
