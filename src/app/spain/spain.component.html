@@ -29,7 +29,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           {{ "SPAIN.CASES" | translate }}
         </th>
-        <td mat-cell *matCellDef="let element">{{ element["Casos "] }}</td>
+        <td mat-cell *matCellDef="let element">{{ element["CASOS"] }}</td>
       </ng-container>
 
       <!-- Hospital Column -->
@@ -68,7 +68,7 @@
   <div class="info-representation">
     <p>{{ "DASHBOARD.REPRESENT" | translate }}:</p>
     <mat-chip-list>
-      <mat-chip (click)="select('Casos ')" [selected]="isTotalSelected">{{ "SPAIN.CASES" | translate }}
+      <mat-chip (click)="select('CASOS')" [selected]="isTotalSelected">{{ "SPAIN.CASES" | translate }}
       </mat-chip>
       <mat-chip (click)="select('Hospitalizados')" [selected]="isActiveSelected">{{ "SPAIN.HOSPITAL" | translate }}
       </mat-chip>

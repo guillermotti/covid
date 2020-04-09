@@ -26,7 +26,7 @@ export class SpainComponent implements OnInit {
     "EX": "Extremadura",
     "GA": "Galicia",
     "MD": "Comunidad de Madrid",
-    "ME": "Melilla",
+    "ML": "Melilla",
     "MC": "Región de Murcia",
     "NC": "Comunidad Foral de Navarra",
     "PV": "País Vasco",
@@ -49,7 +49,7 @@ export class SpainComponent implements OnInit {
   colorScheme: any = {
     domain: ['#40486a', '#4fd0f9', '#8f99af', '#95a7f6', "#6e7cb6", "#485177", "#313751", "#3b9bb9", "#276579", "#4fd0f9", "#12303a", "#5b616f", "#cedcfb", "#8f99af", "#aab0b4", "#99acbc"]
   }
-  chartType: string = 'Casos ';
+  chartType: string = 'CASOS';
   spainData: any[];
   totalData: any;
   updated: string;
@@ -100,16 +100,22 @@ export class SpainComponent implements OnInit {
       this.ngxCsvParser.parse(file, { header: true, delimiter: ',' })
         .pipe().subscribe((result: Array<any>) => {
           this.totalData = result;
-          this.updated = result[result.length - 3]["Fecha"];
-          this.spainData = result.slice(Math.max(result.length - 21, 0))
-          this.spainData.pop();
-          this.spainData.pop();
+          this.totalData.pop();
+          this.totalData.pop();
+          this.totalData.pop();
+          this.totalData.map(item => {
+            item['FECHA'] = (item["FECHA"].split('/')[0].length === 1 ? '0' + item["FECHA"].split('/')[0] : item["FECHA"].split('/')[0])
+              + '/' + (item["FECHA"].split('/')[1].length === 1 ? '0' + item["FECHA"].split('/')[1] : item["FECHA"].split('/')[1])
+              + '/' + item["FECHA"].split('/')[2];
+          });
+          this.updated = this.totalData[this.totalData.length - 1]["FECHA"];
+          this.spainData = this.totalData.slice(Math.max(this.totalData.length - 19, 0))
           this.spainData.sort((a, b) => { return b[this.chartType] - a[this.chartType] });
           this.setLineChart(this.chartType);
           this.setMapChart(this.chartType);
-          this.setChart(this.barChart, 'comunidad', this.chartType);
-          this.setChart(this.pieChart, 'comunidad', this.chartType);
-          this.setChart(this.gaugeChart, 'comunidad', this.chartType);
+          this.setChart(this.barChart, 'CCAA', this.chartType);
+          this.setChart(this.pieChart, 'CCAA', this.chartType);
+          this.setChart(this.gaugeChart, 'CCAA', this.chartType);
           this.dataSource = new MatTableDataSource(this.spainData);
         }, (error: NgxCSVParserError) => {
           console.log('Error', error);
@@ -157,7 +163,7 @@ export class SpainComponent implements OnInit {
     chart['data'] = [];
     this.spainData.sort((a, b) => { return b[xLabel] - a[xLabel] });
     this.spainData.map(item => {
-      chart['data'].push({ name: item[yLabel], value: item[xLabel] });
+      chart['data'].push({ name: this.ccaa[item[yLabel]], value: item[xLabel] });
     })
     Object.assign(this, chart['data']);
   }
@@ -169,44 +175,44 @@ export class SpainComponent implements OnInit {
     { name: 'Extremadura', series: [] }, { name: 'Galicia', series: [] }, { name: 'Comunidad de Madrid', series: [] }, { name: 'Melilla', series: [] },
     { name: 'Región de Murcia', series: [] }, { name: 'Comunidad Foral de Navarra', series: [] }, { name: 'País Vasco', series: [] }, { name: 'La Rioja', series: [] }];
     this.totalData.map(item => {
-      if (item['CCAA Codigo ISO'] === 'AN') {
-        this.lineChart.data[0].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'AR') {
-        this.lineChart.data[1].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'AS') {
-        this.lineChart.data[2].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'IB') {
-        this.lineChart.data[3].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'CN') {
-        this.lineChart.data[4].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'CB') {
-        this.lineChart.data[5].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'CM') {
-        this.lineChart.data[6].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'CL') {
-        this.lineChart.data[7].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'CT') {
-        this.lineChart.data[8].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'CE') {
-        this.lineChart.data[9].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'VC') {
-        this.lineChart.data[10].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'EX') {
-        this.lineChart.data[11].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'GA') {
-        this.lineChart.data[12].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'MD') {
-        this.lineChart.data[13].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'ME') {
-        this.lineChart.data[14].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'MC') {
-        this.lineChart.data[15].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'NC') {
-        this.lineChart.data[16].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'PV') {
-        this.lineChart.data[17].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
-      } else if (item['CCAA Codigo ISO'] === 'RI') {
-        this.lineChart.data[18].series.push({ name: item['Fecha'], value: item[type] === '' ? 0 : item[type] })
+      if (item['CCAA'] === 'AN') {
+        this.lineChart.data[0].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'AR') {
+        this.lineChart.data[1].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'AS') {
+        this.lineChart.data[2].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'IB') {
+        this.lineChart.data[3].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'CN') {
+        this.lineChart.data[4].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'CB') {
+        this.lineChart.data[5].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'CM') {
+        this.lineChart.data[6].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'CL') {
+        this.lineChart.data[7].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'CT') {
+        this.lineChart.data[8].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'CE') {
+        this.lineChart.data[9].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'VC') {
+        this.lineChart.data[10].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'EX') {
+        this.lineChart.data[11].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'GA') {
+        this.lineChart.data[12].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'MD') {
+        this.lineChart.data[13].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'ML') {
+        this.lineChart.data[14].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'MC') {
+        this.lineChart.data[15].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'NC') {
+        this.lineChart.data[16].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'PV') {
+        this.lineChart.data[17].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
+      } else if (item['CCAA'] === 'RI') {
+        this.lineChart.data[18].series.push({ name: item['FECHA'], value: item[type] === '' ? 0 : item[type] })
       }
     });
   }
@@ -214,8 +220,8 @@ export class SpainComponent implements OnInit {
   setMapChart(type: string) {
     this.mapData = [];
     this.spainData.map(item => {
-      this.mapData.push([item["CCAA Codigo ISO"], Number(item[type])])
-      item["comunidad"] = this.ccaa[item["CCAA Codigo ISO"]];
+      this.mapData.push([item["CCAA"], Number(item[type])])
+      item["comunidad"] = this.ccaa[item["CCAA"]];
     });
     this.mapData.map(item => {
       item[0] = `ES-${item[0]}`;
@@ -234,7 +240,7 @@ export class SpainComponent implements OnInit {
   select(type: string) {
     this.chartType = type;
     switch (type) {
-      case 'Casos ': {
+      case 'CASOS': {
         this.isTotalSelected = true;
         this.isDeceasedSelected = false;
         this.isCriticalSelected = false
@@ -263,9 +269,9 @@ export class SpainComponent implements OnInit {
         break;
       }
     }
-    this.setChart(this.barChart, 'comunidad', this.chartType);
-    this.setChart(this.pieChart, 'comunidad', this.chartType);
-    this.setChart(this.gaugeChart, 'comunidad', this.chartType);
+    this.setChart(this.barChart, 'CCAA', this.chartType);
+    this.setChart(this.pieChart, 'CCAA', this.chartType);
+    this.setChart(this.gaugeChart, 'CCAA', this.chartType);
     this.setLineChart(this.chartType);
     this.setMapChart(this.chartType);
   }
