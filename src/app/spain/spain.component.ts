@@ -103,6 +103,7 @@ export class SpainComponent implements OnInit {
           this.totalData.pop();
           this.totalData.pop();
           this.totalData.pop();
+          this.totalData.pop();
           this.totalData.map(item => {
             item['FECHA'] = (item["FECHA"].split('/')[0].length === 1 ? '0' + item["FECHA"].split('/')[0] : item["FECHA"].split('/')[0])
               + '/' + (item["FECHA"].split('/')[1].length === 1 ? '0' + item["FECHA"].split('/')[1] : item["FECHA"].split('/')[1])
