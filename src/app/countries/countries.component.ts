@@ -75,10 +75,10 @@ export class CountriesComponent implements OnInit {
       this.adapter.setLocale(this.language);
     });
     this.language = this.translateService.currentLang;
-    this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
+    this.httpClient.get('https://corona.lmao.ninja/v2/all').subscribe(response => {
       this.updated = new Date(response['updated']);
     });
-    this.httpClient.get('https://corona.lmao.ninja/countries').subscribe(response => {
+    this.httpClient.get('https://corona.lmao.ninja/v2/countries').subscribe(response => {
       this.data = response as [];
       this.filteredOptions = this.myControl.valueChanges
         .pipe(
@@ -120,7 +120,7 @@ export class CountriesComponent implements OnInit {
   }
 
   selectCountry(country: string) {
-    this.httpClient.get(`https://corona.lmao.ninja/v2/historical/${country}`).subscribe(response => {
+    this.httpClient.get(`https://corona.lmao.ninja/v2/v2/historical/${country}`).subscribe(response => {
       this.historicCountrySelected = response;
       this.lineChart.data = [];
       const cases = Object.entries(this.historicCountrySelected.timeline.cases);
@@ -139,7 +139,7 @@ export class CountriesComponent implements OnInit {
         this.selectDate('both');
       }
     });
-    this.httpClient.get(`https://corona.lmao.ninja/countries/${country}`).subscribe(response => {
+    this.httpClient.get(`https://corona.lmao.ninja/v2/countries/${country}`).subscribe(response => {
       this.countrySelected = response;
     });
   }

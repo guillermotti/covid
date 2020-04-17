@@ -27,10 +27,10 @@ export class MapComponent implements OnInit {
       this.language = language;
     });
     this.language = this.translateService.currentLang;
-    this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
+    this.httpClient.get('https://corona.lmao.ninja/v2/all').subscribe(response => {
       this.updated = new Date(response['updated']);
     });
-    this.httpClient.get('https://corona.lmao.ninja/countries').subscribe(response => {
+    this.httpClient.get('https://corona.lmao.ninja/v2/countries').subscribe(response => {
       this.data = response as [];
       this.setMap('cases');
       this.isLoaded = true;

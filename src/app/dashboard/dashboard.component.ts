@@ -69,10 +69,10 @@ export class DashboardComponent implements OnInit {
     for (let i = 2; i <= 20; i++) {
       this.chartNumberItems.push(i);
     }
-    this.httpClient.get('https://corona.lmao.ninja/all').subscribe(response => {
+    this.httpClient.get('https://corona.lmao.ninja/v2/all').subscribe(response => {
       this.allData = response;
       this.updated = new Date(response['updated']);
-      this.httpClient.get('https://corona.lmao.ninja/countries').subscribe(res => {
+      this.httpClient.get('https://corona.lmao.ninja/v2/countries').subscribe(res => {
         this.countriesData = res as [];
         this.allData.critical = 0;
         this.countriesData.map(item => {
