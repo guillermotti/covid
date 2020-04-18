@@ -104,10 +104,16 @@ export class SpainComponent implements OnInit {
           this.totalData.pop();
           this.totalData.pop();
           this.totalData.pop();
-          this.totalData.map(item => {
+          this.totalData.pop();
+          this.totalData.pop();
+          this.totalData.map((item, index) => {
+            if (Array.isArray(item)) {
+              item = {'CCAA': item[0], 'FECHA': item[1], 'CASOS': item[2], 'Hospitalizados': item[3], 'UCI': item[4], 'Fallecidos': item[5], 'Recuperados': item[6] ? item[6] : ''}
+            }
             item['FECHA'] = (item["FECHA"].split('/')[0].length === 1 ? '0' + item["FECHA"].split('/')[0] : item["FECHA"].split('/')[0])
               + '/' + (item["FECHA"].split('/')[1].length === 1 ? '0' + item["FECHA"].split('/')[1] : item["FECHA"].split('/')[1])
               + '/' + item["FECHA"].split('/')[2];
+            this.totalData[index] = item;
           });
           this.updated = this.totalData[this.totalData.length - 1]["FECHA"];
           this.spainData = this.totalData.slice(Math.max(this.totalData.length - 19, 0))
