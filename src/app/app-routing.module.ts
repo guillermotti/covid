@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'information', component: InformationComponent },
   { path: 'countries', component: CountriesComponent },
   { path: 'map', component: MapComponent },
-  { path: 'spain', component: SpainComponent },
+  // { path: 'spain', component: SpainComponent },
   { path: 'about', component: AboutComponent },
   { path: '', redirectTo: 'index', pathMatch: 'full' },
   { path: '**', redirectTo: 'index', pathMatch: 'full' }

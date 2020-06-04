@@ -7,8 +7,8 @@ jobs:
       - checkout
       - run:
           command: npm install
-      - run:
-          command: curl https://covid19.isciii.es/resources/serie_historica_acumulados.csv > ./src/assets/csv/covid.csv
+      # - run:
+      #     command: curl https://covid19.isciii.es/resources/serie_historica_acumulados.csv > ./src/assets/csv/covid.csv
       - run:
           command: ./node_modules/.bin/ng build --prod
       - run:
@@ -19,16 +19,16 @@ jobs:
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
-  nightly:
-    triggers: #use the triggers key to indicate a scheduled build
-      - schedule:
-          cron: "0 4,8,11 * * *" # use cron syntax to set the schedule
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - build
+  # nightly:
+  #   triggers: #use the triggers key to indicate a scheduled build
+  #     - schedule:
+  #         cron: "0 4,8,11 * * *" # use cron syntax to set the schedule
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
+  #   jobs:
+  #     - build
   workflow:
     jobs:
       - build
